@@ -4,7 +4,7 @@
 
 Copyright (c) 2024
 
-This report (source contained in the [`522_group_36` repository](https://github.com/UBC-MDS/522_group_36)) is made available under the **Attribution-NonCommercial-NoDerivatives 4.0 International** ([CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)). 
+This report (source contained in the [`taxi_fare_predictor` repository](https://github.com/UBC-MDS/taxi_fare_predictor)) is made available under the **Attribution-NonCommercial-NoDerivatives 4.0 International** ([CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/)). 
 
 This is a human-readable summary of (and not a substitute for) the [license](https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode).
 
