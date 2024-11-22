@@ -7,8 +7,8 @@ This outlines how to propose a change to the project.
 Small typos or grammatical errors in documentation may be edited directly using
 the GitHub web interface, so long as the changes are made in the _source_ file.
 
-*  YES: you edit a roxygen comment in a `.R` file below `R/`.
-*  NO: you edit an `.Rd` file below `man/`.
+*  YES: You edit a docstring in a .py file within the source directory.
+*  NO: You edit a .ipynb file in the documentation folder.
 
 ### Prerequisites
 
