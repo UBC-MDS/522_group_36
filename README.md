@@ -6,8 +6,8 @@ In this project we attempt to predict the fare price of yellow taxi trips in NYC
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/UBC-MDS/taxi_fare_predictor.git
-    cd taxi_fare_predictor
+    git clone https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor.git
+    cd DSCI_522_Group36_taxi_fare_predictor
     ```
 
 2. **Open taxi_fare_predictor_report.ipynb**
