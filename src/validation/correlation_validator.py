@@ -32,7 +32,6 @@ class CorrelationValidator:
         dataset = Dataset(df, label=self.target)
         check = FeatureLabelCorrelation().add_condition_feature_pps_less_than(self.feature_threshold)
         result = check.run(dataset)
-        ``
         if not result.passed_conditions():
             logging.error("Feature-Label correlation exceeds the threshold.")
             raise ValueError("Feature-Label correlation exceeds the maximum acceptable threshold.")
