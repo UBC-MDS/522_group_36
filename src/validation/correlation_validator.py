@@ -2,9 +2,16 @@ import logging
 import pandas as pd
 from deepchecks.tabular import Dataset
 from deepchecks.tabular.checks import FeatureLabelCorrelation, FeatureFeatureCorrelation
+logging.basicConfig(
+        filename="logs/correlation_errors.log",
+        filemode="a",
+        format="%(asctime)s - %(levelname)s - %(message)s",
+        level=logging.INFO,
+    )
 
 class CorrelationValidator:
-    def __init__(self, target: str, feature_threshold: float = 0.9, feature_feature_threshold: float = 0.8):
+    def __init__(self, target: str, feature_threshold: float = 0.9, feature_feature_threshold: float = 0.8,
+                 log_file: str = None):
         """
         Initializes the CorrelationValidator.
 
@@ -15,12 +22,7 @@ class CorrelationValidator:
         self.target = target
         self.feature_threshold = feature_threshold
         self.feature_feature_threshold = feature_feature_threshold
-        logging.basicConfig(
-            filename="logs/correlation_errors.log",
-            filemode="a",
-            format="%(asctime)s - %(levelname)s - %(message)s",
-            level=logging.INFO,
-        )
+       
     
     def check_feature_label_correlation(self, df: pd.DataFrame):
         """
