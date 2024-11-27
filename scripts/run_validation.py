@@ -1,5 +1,11 @@
+# scripts/run_validation.py
+
 import sys
+import os
 import yaml
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 from src.validation.validate import DataValidator
 
 def load_config(config_path: str) -> dict:
@@ -18,12 +24,16 @@ def load_config(config_path: str) -> dict:
         sys.exit(1)
 
 def main():
+    # Add the project root to sys.path
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    if project_root not in sys.path:
+        sys.path.insert(0, project_root)
+
     # Load configuration
-    config_path = "config/validation_config.yaml"
+    config_path = os.path.join(project_root, "config", "validation_config.yaml")
     config = load_config(config_path)
     
-    data_path = config.get("data_path", "src/data/raw/yellow_cab_data.csv")
-    expected_format = config.get("expected_format", "csv")
+    data_path = config.get("data_path", "data/raw/yellow_tripdata_2024-01.csv")
     delimiter = config.get("delimiter", ",")
     expected_columns = config.get("expected_columns", [
         "VendorID", "tpep_pickup_datetime", "tpep_dropoff_datetime",
@@ -40,8 +50,8 @@ def main():
     # Initialize the DataValidator with dynamic thresholds
     validator = DataValidator(
         target="VendorID",  # Adjust target as needed
-        log_file="logs/validation_errors.log",
-        correlation_log_file="logs/correlation_errors.log"
+        log_file=os.path.join(project_root, "logs", "validation_errors.log"),
+        correlation_log_file=os.path.join(project_root, "logs", "correlation_errors.log")
     )
     validator.correlation_validator.feature_threshold = feature_label_threshold
     validator.correlation_validator.feature_feature_threshold = feature_feature_threshold
@@ -50,8 +60,6 @@ def main():
     try:
         validated_df = validator.run_validation(
             file_path=data_path,
-            expected_format=expected_format,
-            delimiter=delimiter,
             expected_columns=expected_columns
         )
         print("Data validation passed successfully.")
@@ -59,9 +67,22 @@ def main():
         print(f"Data validation failed: {ve}")
         sys.exit(1)
     
-    # Save the validated data
-    validated_data_path = "src/data/processed/yellow_cab_data_validated.csv"
-    validated_df.to_csv(validated_data_path, index=False)
+    # Save the validated data based on the file format
+    file_extension = data_path.split(".")[-1].lower()
+    if file_extension == "csv":
+        validated_data_path = os.path.join(project_root, "data", "processed", "yellow_tripdata_2024-01_validated.csv")
+        validated_df.to_csv(validated_data_path, index=False)
+    elif file_extension == "parquet":
+        validated_data_path = os.path.join(project_root, "data", "processed", "yellow_tripdata_2024-01_validated.parquet")
+        validated_df.to_parquet(validated_data_path, engine='pyarrow', index=False)
+    elif file_extension == "xlsx":
+        validated_data_path = os.path.join(project_root, "data", "processed", "yellow_tripdata_2024-01_validated.xlsx")
+        validated_df.to_excel(validated_data_path, engine='openpyxl', index=False)
+    else:
+        # This case should not occur due to prior checks
+        validated_data_path = os.path.join(project_root, "data", "processed", "yellow_tripdata_2024-01_validated.csv")
+        validated_df.to_csv(validated_data_path, index=False)
+    
     print(f"Validated data saved to {validated_data_path}")
 
 if __name__ == "__main__":

@@ -1,6 +1,5 @@
-data_path: "data/yellow_tripdata_2024-01.csv"  
-expected_format: "csv" , "parquet"                    
-delimiter: ","                                
+data_path: "data/raw/yellow_tripdata_2024-01.csv"  # Change as needed
+delimiter: ","                                  # Applicable only for CSV files
 expected_columns:
   - "VendorID"
   - "tpep_pickup_datetime"
