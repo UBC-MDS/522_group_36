@@ -10,13 +10,7 @@ class DataValidator:
     ALLOWED_FORMATS = ["csv", "parquet", "xlsx"]
     
     def __init__(self, target: str, log_file: str = "logs/validation_errors.log", correlation_log_file: str = "logs/correlation_errors.log"):
-        """
-        Initializes the DataValidator with schema and correlation validators.
-
-        :param target: The target/response variable in the dataset.
-        :param log_file: Path to the log file for validation errors.
-        :param correlation_log_file: Path to the log file for correlation errors.
-        """
+        
         self.schema = get_taxi_data_schema()
         self.correlation_validator = CorrelationValidator(
             target=target, 
@@ -32,13 +26,6 @@ class DataValidator:
         )
     
     def check_file_format(self, file_path: str) -> str:
-        """
-        Checks if the file at file_path is among the allowed formats.
-
-        :param file_path: Path to the data file.
-        :return: The file format (extension) if valid.
-        :raises ValueError: If the file format is not allowed.
-        """
         _, ext = os.path.splitext(file_path)
         ext = ext.lower().lstrip(".")
         
@@ -51,14 +38,6 @@ class DataValidator:
             return ext
     
     def load_data(self, file_path: str, file_format: str) -> pd.DataFrame:
-        """
-        Loads the data based on the file format.
-
-        :param file_path: Path to the data file.
-        :param file_format: Format of the data file.
-        :return: Loaded pandas DataFrame.
-        :raises ValueError: If loading fails.
-        """
         try:
             if file_format == "csv":
                 df = pd.read_csv(file_path, delimiter=",", parse_dates=["tpep_pickup_datetime", "tpep_dropoff_datetime"])
@@ -78,13 +57,6 @@ class DataValidator:
             raise ValueError(error_msg)
     
     def validate_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:
-        """
-        Validates the dataframe against the defined schema and performs correlation checks.
-
-        :param df: The dataframe to validate.
-        :return: Validated dataframe with invalid rows dropped.
-        :raises ValueError: If correlation checks fail.
-        """
         try:
             # Validate schema
             validated_df = self.schema.validate(df, lazy=True)
@@ -118,13 +90,6 @@ class DataValidator:
             raise
     
     def run_validation(self, file_path: str, expected_columns: list = None) -> pd.DataFrame:
-        """
-        Orchestrates the entire validation process: file format check, data loading, schema validation, and correlation checks.
-
-        :param file_path: Path to the data file.
-        :param expected_columns: List of expected column names.
-        :return: Validated dataframe.
-        """
         # Check file format
         file_format = self.check_file_format(file_path)
         
