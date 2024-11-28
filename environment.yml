@@ -28,6 +28,6 @@ dependencies:
     - vegafusion
     - vegafusion-python-embed
     - vl-convert-python
-    - pandera==0.21.0
-    - deepchecks-installer==0.3
     - deepchecks
+    - pandera
+ 
