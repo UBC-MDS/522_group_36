@@ -7,7 +7,6 @@ def get_taxi_postEDA_data_schema() -> DataFrameSchema:
         {
             "trip_distance": pa.Column(
                 float,
-                pa.Check(lambda row: row >= 0)
                 checks=Check.ge(0, element_wise=True),
                 nullable=False,
                 description="Elapsed trip distance in miles reported by the taximeter.",
