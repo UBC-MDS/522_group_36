@@ -7,13 +7,13 @@ def get_taxi_postEDA_data_schema() -> DataFrameSchema:
         {
             "trip_distance": pa.Column(
                 float,
-                checks=Check.ge(0, element_wise=True),
+                checks=Check(lambda x: x >= 0),
                 nullable=False,
                 description="Elapsed trip distance in miles reported by the taximeter.",
             ),
             "fare_amount": pa.Column(
                 float,
-                checks=Check.ge(0, element_wise=True),
+                checks=Check(lambda x: x >= 0),
                 nullable=False,
                 description="Fare amount in USD.",
             )
