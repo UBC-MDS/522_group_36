@@ -18,9 +18,9 @@ In this project we attempt to predict the fare price of yellow taxi trips in NYC
     
 2. **Run the container using the command line**
     ``` 
-    docker run --rm -it -p 9999:8888 lixuanlin/taxi-fare-predictor
+    docker-compose up
     ```
-    \* We are doing a port mapping here. Try docker run --rm -it -p 8888:8888 lixuanlin/taxi-fare-predictor if your port 8888 port is free. 
+    \* We are doing a port mapping here. To run the docker-compose, make sure your 8888 port is free. 
 
     If you are testing this out locally, you can also build the Docker image locally by running the following commands: 
     ```
