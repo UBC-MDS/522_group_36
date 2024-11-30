@@ -20,16 +20,33 @@ In this project we attempt to predict the fare price of yellow taxi trips in NYC
     ``` 
     docker run --rm -it -p 9999:8888 lixuanlin/taxi-fare-predictor
     ```
+    \* We are doing a port mapping here. Try docker run --rm -it -p 8888:8888 lixuanlin/taxi-fare-predictor if your port 8888 port is free. 
+
+    If you are testing this out locally, you can also build the Docker image locally by running the following commands: 
+    ```
+    docker build -t taxi-fare-predictor .
+
+    docker run --rm -it -p 8888:8888 -v "$(pwd):/home/jovyan/work" taxi-fare-predictor
+    ```
+    Make sure current working directory is the root of this project.
+
 3. **Copy and paste the URL into your browser**
    
    In the terminal, look for a URL that starts with 
     `http://127.0.0.1:8888/lab?token=` 
 
-4. **Run the analysis**
+    
+4. **Run data validation**
+    
+    ```
+    python scripts/run_validation.py
+    ```
+    This script will check if the data is valid and print out the result. If the data is valid, it will print out "Data is valid". If the data is invalid, it will log the error messages in logs.
+5. **Run the analysis**
 
     open `yellow_taxi_analysis.ipynb` in Jupyter Lab you just launched
 
-5. **Restart the kernel and run all cells to see the analysis**
+6. **Restart the kernel and run all cells to see the analysis**
 
    under the "Kernel" menu click "Restart Kernel and Run All Cells..."
 
