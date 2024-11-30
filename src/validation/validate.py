@@ -58,16 +58,13 @@ class DataValidator:
     
     def validate_dataframe(self, df: pd.DataFrame) -> pd.DataFrame:
         try:
-            # Validate schema
             validated_df = self.schema.validate(df, lazy=True)
             logging.info("Schema validation passed.")
             
-            # Perform correlation checks
             self.correlation_validator.run_all_checks(validated_df)
             
             return validated_df
         except pa.errors.SchemaErrors as e:
-            # Log all schema validation errors
             error_details = e.failure_cases.to_dict(orient="records")
             error_message = json.dumps(error_details, indent=2)
             logging.error(f"Schema validation failed with errors:\n{error_message}")
@@ -83,20 +80,14 @@ class DataValidator:
             logging.info("Invalid rows have been dropped from the dataframe.")
             return validated_df
         except ValueError as ve:
-            # Log correlation validation errors
             logging.error(str(ve))
-            # Depending on your use case, you can choose to either drop problematic rows,
-            # raise an exception, or take other actions. Here, we'll re-raise the exception.
             raise
     
     def run_validation(self, file_path: str, expected_columns: list = None) -> pd.DataFrame:
-        # Check file format
         file_format = self.check_file_format(file_path)
         
-        # Load data based on file format
         df = self.load_data(file_path, file_format)
         
-        # Validate DataFrame structure based on expected columns
         if expected_columns:
             missing_columns = set(expected_columns) - set(df.columns)
             if missing_columns:
@@ -106,7 +97,6 @@ class DataValidator:
             else:
                 logging.info("All expected columns are present in the data file.")
         
-        # Validate the DataFrame
         validated_df = self.validate_dataframe(df)
         
         return validated_df
