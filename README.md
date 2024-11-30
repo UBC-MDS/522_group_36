@@ -41,7 +41,8 @@ In this project we attempt to predict the fare price of yellow taxi trips in NYC
     ```
     python scripts/run_validation.py
     ```
-    This script will check if the data is valid and print out the result. If the data is valid, it will print out "Data is valid". If the data is invalid, it will log the error messages in logs.
+    This script will check if the data is valid and print out the result. If the data is valid, it will print out "Data validation passed successfully". If the data is invalid, it will log the error messages in logs and remove those rows. The validated data will be saved in data/processed. In this testing, we only removed 2000 rows after validation which are data that is outside of the NYC taxi data [documentation](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf) range.
+
 5. **Run the analysis**
 
     open `yellow_taxi_analysis.ipynb` in Jupyter Lab you just launched

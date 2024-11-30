@@ -73,12 +73,12 @@ def get_taxi_data_schema() -> DataFrameSchema:
                 nullable=False,
                 description="Payment method: 1=Credit card, 2=Cash, etc.",
             ),
-            "fare_amount": Column(
-                pa.Float,
-                checks=Check.ge(0, element_wise=True),
-                nullable=False,
-                description="Fare amount in USD.",
-            ),
+            # "fare_amount": Column(
+            #     pa.Float,
+            #     checks=Check.ge(0, element_wise=True),
+            #     nullable=False,
+            #     description="Fare amount in USD.",
+            # ),
             "extra": Column(
                 pa.Float,
                 checks=Check.ge(0, element_wise=True),
@@ -96,6 +96,17 @@ def get_taxi_data_schema() -> DataFrameSchema:
                 checks=Check.ge(0, element_wise=True),
                 nullable=False,
                 description="Tip amount in USD.",
+            ),
+            "fare_amount": Column(
+                pa.Float,
+                checks=[
+                    Check.ge(0, element_wise=True),
+                    Check(lambda s: s.isna().mean() <= 0.01, 
+                         element_wise=False,
+                         error="Too many null values (>1%) in fare_amount column.")
+                ],
+                nullable=False,
+                description="Fare amount in USD.",
             ),
             "tolls_amount": Column(
                 pa.Float,
