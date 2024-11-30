@@ -18,7 +18,7 @@ In this project we attempt to predict the fare price of yellow taxi trips in NYC
     
 2. **Run the container using the command line**
     ``` 
-    docker-compose up
+    docker compose up
     ```
     \* We are doing a port mapping here. To run the docker-compose, make sure your 8888 port is free. 
 
