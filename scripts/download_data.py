@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
-
-#temporarily run as python -m scripts.download_data
+import click
 
 def download_and_save_data(data_set_link, output_csv, sample_size=30000, random_state=123):
     """Downloads and saves a sample from a parquet dataset to a CSV file.
@@ -26,7 +25,22 @@ def download_and_save_data(data_set_link, output_csv, sample_size=30000, random_
     print(f"Data shape: {df.shape}")
     print(df.head(2))
 
+@click.command()
+@click.option('--data-set-link', '-d', 
+              default="https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet",
+              help='URL or file path to the parquet dataset')
+@click.option('--output-csv', '-o', 
+              default='data/yellow_tripdata_2024-01.csv',
+              help='File path where the CSV will be saved')
+@click.option('--sample-size', '-n', 
+              default=30000, 
+              help='Number of rows to sample')
+@click.option('--random-state', '-r', 
+              default=123, 
+              help='Seed for random sampling')
+def main(data_set_link, output_csv, sample_size, random_state):
+    """Download and sample data from a parquet file and save to CSV."""
+    download_and_save_data(data_set_link, output_csv, sample_size, random_state)
+
 if __name__ == "__main__":
-    data_set_link = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet"
-    output_csv = 'data/yellow_tripdata_2024-01.csv'
-    download_and_save_data(data_set_link, output_csv)
+    main()

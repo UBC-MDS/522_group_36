@@ -4,6 +4,7 @@ import altair as alt
 from sklearn.model_selection import train_test_split
 import pandera as pa
 from src.schema_postEDA import get_taxi_postEDA_data_schema
+import click
 
 # Enable VegaFusion for Altair
 alt.data_transformers.enable("vegafusion")
@@ -38,11 +39,11 @@ class TaxiDataAnalyzer:
         """Load dataset from the specified file path."""
         try:
             self.df = pd.read_csv(self.file_path).drop_duplicates()
-            print(f"Data loaded successfully from {self.file_path}.")
+            click.echo(f"Data loaded successfully from {self.file_path}.")
         except FileNotFoundError:
-            print(f"File not found: {self.file_path}")
+            click.echo(f"File not found: {self.file_path}")
         except pd.errors.ParserError as e:
-            print(f"Error parsing CSV: {e}")
+            click.echo(f"Error parsing CSV: {e}")
 
     def create_density_chart(self, column, title="Density Chart"):
         """
@@ -285,27 +286,72 @@ class TaxiDataAnalyzer:
             self.create_correlation_plot(subset="train")
             self.validate_data_schema(subset="train")
 
-    # Additional methods can be added here as needed.
+
+@click.group()
+def cli():
+    """Taxi Data Analyzer CLI"""
+    pass
 
 
-if __name__ == "__main__":
-
-    # Create an instance of the analyzer with the dataset path and schema
-    analyzer = TaxiDataAnalyzer(
-        file_path="data/processed/yellow_tripdata_2024-01_validated.csv",
-        # schema=schema,
-        charts_dir="charts",
-    )
-
-    # Run all analysis steps
+@cli.command()
+@click.argument('file_path', type=click.Path(exists=True))
+@click.option('--charts_dir', default="charts", help="Directory to save charts.")
+def run_all(file_path, charts_dir):
+    """Run all analysis steps on the dataset."""
+    analyzer = TaxiDataAnalyzer(file_path, charts_dir)
     analyzer.run_all()
 
-    # Alternatively, you can call individual methods as needed:
-    # analyzer.load_data()
-    # analyzer.create_density_chart('fare_amount', title="Fare_Amount_Density_Chart")
-    # analyzer.filter_negative_fares()
-    # analyzer.split_dataset()
-    # analyzer.display_summary_statistics(subset='train')
-    # analyzer.visualize_missing_values(subset='train')
-    # analyzer.create_correlation_plot(subset='train')
-    # analyzer.validate_data_schema(subset='train')
+
+@cli.command()
+@click.argument('file_path', type=click.Path(exists=True))
+@click.option('--charts_dir', default="charts", help="Directory to save charts.")
+def load(file_path, charts_dir):
+    """Load the dataset."""
+    analyzer = TaxiDataAnalyzer(file_path, charts_dir)
+    analyzer.load_data()
+
+
+@cli.command()
+@click.argument('file_path', type=click.Path(exists=True))
+@click.option('--charts_dir', default="charts", help="Directory to save charts.")
+@click.option('--column', required=True, help="Column to plot.")
+@click.option('--title', default="Density Chart", help="Title of the density chart.")
+def create_density_chart(file_path, charts_dir, column, title):
+    """Create a density chart for a specified column."""
+    analyzer = TaxiDataAnalyzer(file_path, charts_dir)
+    analyzer.load_data()
+    analyzer.create_density_chart(column, title)
+
+
+@cli.command()
+@click.argument('file_path', type=click.Path(exists=True))
+@click.option('--charts_dir', default="charts", help="Directory to save charts.")
+def filter_negative_fares(file_path, charts_dir):
+    """Filter out rows with negative fare amounts."""
+    analyzer = TaxiDataAnalyzer(file_path, charts_dir)
+    analyzer.load_data()
+    analyzer.filter_negative_fares()
+
+
+@cli.command()
+@click.argument('file_path', type=click.Path(exists=True))
+@click.option('--charts_dir', default="charts", help="Directory to save charts.")
+def split_dataset(file_path, charts_dir):
+    """Split the dataset into training and testing sets."""
+    analyzer = TaxiDataAnalyzer(file_path, charts_dir)
+    analyzer.load_data()
+    analyzer.split_dataset()
+
+
+@cli.command()
+@click.argument('file_path', type=click.Path(exists=True))
+@click.option('--charts_dir', default="charts", help="Directory to save charts.")
+@click.option('--subset', default="train", type=click.Choice(['train', 'test', 'all']), help="Subset of the data to validate.")
+def validate_schema(file_path, charts_dir, subset):
+    """Validate the data schema."""
+    analyzer = TaxiDataAnalyzer(file_path, charts_dir)
+    analyzer.load_data()
+    analyzer.validate_data_schema(subset)
+
+if __name__ == "__main__":
+    cli()

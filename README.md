@@ -45,7 +45,16 @@ In this project we attempt to predict the fare price of yellow taxi trips in NYC
 
 5. **Run the analysis**
 
-    open `yellow_taxi_analysis.ipynb` in Jupyter Lab you just launched
+    To run the analysis, open a terminal and run the following commands:
+    ```
+    python -m scripts.download_data 
+
+    python -m scripts.run_eda run-all data/processed/yellow_tripdata_2024-01_validated.csv \
+    --charts_dir charts
+    ```
+
+
+   
 
 6. **Restart the kernel and run all cells to see the analysis**
 
