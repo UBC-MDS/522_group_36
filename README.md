@@ -53,10 +53,16 @@ In this project we attempt to predict the fare price of yellow taxi trips in NYC
     --charts_dir charts
     ```
 
+6. **Run the model**
 
+   To run the model, run the following commands in the terminal:
+
+   ```
+   python scripts/modeling.py --x-train-path data/processed/X_train.csv --y-train-path data/processed/y_train.csv --x-test-path data/processed/X_test.csv --y-test-path data/processed/y_test.csv
+   ```
    
 
-6. **Restart the kernel and run all cells to see the analysis**
+7. **Restart the kernel and run all cells to see the analysis**
 
    under the "Kernel" menu click "Restart Kernel and Run All Cells..."
 
