@@ -39,15 +39,30 @@ In this project we attempt to predict the fare price of yellow taxi trips in NYC
 4. **Run data validation**
     
     ```
-    python scripts/run_validation.py
+    python -m scripts.run_validation
     ```
     This script will check if the data is valid and print out the result. If the data is valid, it will print out "Data validation passed successfully". If the data is invalid, it will log the error messages in logs and remove those rows. The validated data will be saved in data/processed. In this testing, we only removed 2000 rows after validation which are data that is outside of the NYC taxi data [documentation](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf) range.
 
 5. **Run the analysis**
 
-    open `yellow_taxi_analysis.ipynb` in Jupyter Lab you just launched
+    To run the analysis, open a terminal and run the following commands:
+    ```
+    python -m scripts.download_data 
 
-6. **Restart the kernel and run all cells to see the analysis**
+    python -m scripts.run_eda run-all data/processed/yellow_tripdata_2024-01_validated.csv \
+    --charts_dir charts
+    ```
+
+6. **Run the model**
+
+   To run the model, run the following commands in the terminal:
+
+   ```
+   python scripts/modeling.py --x-train-path data/processed/X_train.csv --y-train-path data/processed/y_train.csv --x-test-path data/processed/X_test.csv --y-test-path data/processed/y_test.csv
+   ```
+   
+
+7. **Restart the kernel and run all cells to see the analysis**
 
    under the "Kernel" menu click "Restart Kernel and Run All Cells..."
 
