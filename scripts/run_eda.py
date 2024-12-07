@@ -37,7 +37,7 @@ class TaxiDataAnalyzer:
     def load_data(self):
         """Load dataset from the specified file path."""
         try:
-            self.df = pd.read_csv(self.file_path)
+            self.df = pd.read_csv(self.file_path).drop_duplicates()
             print(f"Data loaded successfully from {self.file_path}.")
         except FileNotFoundError:
             print(f"File not found: {self.file_path}")
@@ -85,44 +85,33 @@ class TaxiDataAnalyzer:
         )
 
     def split_dataset(self, test_size=0.3, random_state=123):
-        """
-        Split dataset into training and test sets.
-
-        Args:
-            test_size (float, optional): Proportion of the dataset to include in the test split. Defaults to 0.3.
-            random_state (int, optional): Random seed. Defaults to 123.
-        """
         if self.df is None:
             print("Data not loaded. Please load data before splitting.")
             return
 
+        # Split the data
         self.train_df, self.test_df = train_test_split(
             self.df, test_size=test_size, random_state=random_state
         )
+        
+        # Store numpy arrays for modeling
         self.X_train = self.train_df["trip_distance"].values.reshape(-1, 1)
         self.y_train = self.train_df["fare_amount"].values
         self.X_test = self.test_df["trip_distance"].values.reshape(-1, 1)
         self.y_test = self.test_df["fare_amount"].values
-        print(
-            f"Dataset split into {len(self.train_df)} training and {len(self.test_df)} test samples."
-        )
-        # Save X_train, y_train, X_test, y_test as CSV files
+        
+        print(f"Dataset split into {len(self.train_df)} training and {len(self.test_df)} test samples.")
+        
+        # Save split data directly from DataFrames
         processed_dir = "data/processed"
         os.makedirs(processed_dir, exist_ok=True)
-
-        pd.DataFrame(self.X_train, columns=["trip_distance"]).to_csv(
-            os.path.join(processed_dir, "X_train.csv"), index=False
-        )
-        pd.DataFrame(self.y_train, columns=["fare_amount"]).to_csv(
-            os.path.join(processed_dir, "y_train.csv"), index=False
-        )
-        pd.DataFrame(self.X_test, columns=["trip_distance"]).to_csv(
-            os.path.join(processed_dir, "X_test.csv"), index=False
-        )
-        pd.DataFrame(self.y_test, columns=["fare_amount"]).to_csv(
-            os.path.join(processed_dir, "y_test.csv"), index=False
-        )
-
+        
+        # Save only the required columns from the original DataFrames
+        self.train_df[["trip_distance"]].to_csv(os.path.join(processed_dir, "X_train.csv"), index=False)
+        self.train_df[["fare_amount"]].to_csv(os.path.join(processed_dir, "y_train.csv"), index=False)
+        self.test_df[["trip_distance"]].to_csv(os.path.join(processed_dir, "X_test.csv"), index=False)
+        self.test_df[["fare_amount"]].to_csv(os.path.join(processed_dir, "y_test.csv"), index=False)
+        
         print(f"CSV files saved to {processed_dir}")
 
     def display_summary_statistics(self, subset="train"):
@@ -274,10 +263,10 @@ class TaxiDataAnalyzer:
             print(f"{subset.capitalize()} data not available.")
             return
 
-        subset_df = df[["trip_distance", "fare_amount"]]
+        # subset_df = df[["trip_distance", "fare_amount"]]
 
         try:
-            self.schema.validate(subset_df)
+            self.schema.validate(df)
             print(
                 f"Successfully validated the post EDA schema for the {subset} dataset!"
             )
