@@ -97,7 +97,7 @@ test_predictions = pd.DataFrame({
 })
 ```
 
-The regression line formula is: y_hat = `{python} slope` * trip_distance + `{python} intercept`
+The regression line formula is: y_hat = `{python} round(slope, 2)` * trip_distance + `{python} round(intercept, 2)`
 
 Finally, let's calculate some error metrics and perform a visualization of the result of the regression model in the form of a scatter plot with the regression line.
 
@@ -135,9 +135,9 @@ Lastly in @fig-predictions, here is the regression line for the predictions.
 ### Results
 The objective of the analysis was to predict the fare amount using a linear regression model. The regression plot, generated from the model, demonstrates a positive linear relationship between trip distance and fare amount for NYC Yellow Taxis in January 2024. This confirms that as the trip distance increases, the fare amount also increases, as expected.
 
-The linear regression model shows moderate predictive power with an R-squared value of `{python} r2_score(y_true, y_pred)`, which explains about high percent of fare variance. The low MAE of `{python} mean_absolute_error(y_true, y_pred)` USD indicates good accuracy for typical rides, although the higher RMSE (`{python} np.sqrt(mean_squared_error(y_true, y_pred))` USD) suggests sensitivity to outliers. The visual analysis of the errors reveals the model performs best for the 10-50 USD range, and underestimates fares over 100 USD. The actual NYC taxi fare is calculated through initial fare, per-mile charge, and additional fees for peak hours, nighttime, tolls, etc that this model cannot predict, but can be built further using more complicated multilinear regression or ML models.
+The linear regression model shows moderate predictive power with an R-squared value of `{python} round(r2_score(y_true, y_pred), 2)`, which explains about high percent of fare variance. The low MAE of `{python} round(mean_absolute_error(y_true, y_pred), 2)` USD indicates good accuracy for typical rides, although the higher RMSE (`{python} round(np.sqrt(mean_squared_error(y_true, y_pred)), 2)` USD) suggests sensitivity to outliers. The visual analysis of the errors reveals the model performs best for the 10-50 USD range, and underestimates fares over 100 USD. The actual NYC taxi fare is calculated through initial fare, per-mile charge, and additional fees for peak hours, nighttime, tolls, etc that this model cannot predict, but can be built further using more complicated multilinear regression or ML models.
 
-Based on the estimated result from the regression line formula derived from the model, this suggests that for each additional mile traveled, the fare increases by approximately `{python} slope` USD, and the base fare (when the trip distance is zero) is around `{python} intercept` USD.
+Based on the estimated result from the regression line formula derived from the model, this suggests that for each additional mile traveled, the fare increases by approximately `{python} round(slope, 2)` USD, and the base fare (when the trip distance is zero) is around `{python} round(intercept, 2)` USD.
 
 To evaluate the model's predictive performance, we applied it to the test data, which was split from the original dataset (70 percent training, 30 percent testing). The predicted fare amounts were compared against the actual fare amounts in the test set. The predicted values were calculated using the formula derived from the model, where trip distances from the test set were used as input to generate the corresponding fare predictions.
 
