@@ -7,7 +7,7 @@ from src.schema_postEDA import get_taxi_postEDA_data_schema
 import click
 
 # Enable VegaFusion for Altair
-alt.data_transformers.enable("vegafusion")
+#alt.data_transformers.enable("vegafusion")
 
 #temporarily run as python -m scripts.run_eda
 
