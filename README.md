@@ -68,7 +68,7 @@ In this project we attempt to predict the fare price of yellow taxi trips in NYC
 
 ### Clean up
 
-1. To shut down the container and clean up the resources, type `Cntrl` + `C` in the terminal
+1. To shut down the container and clean up the resources, type `Cntrl` + `C` in the terminal where you launched the container, and then type `docker compose rm`
 
 ## Developer notes
 
