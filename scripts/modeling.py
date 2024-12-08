@@ -34,9 +34,24 @@ def main(x_train_path, y_train_path, x_test_path, y_test_path, charts_dir='chart
         'fare_amount': y_test,
         'y_pred': model.predict(X_test)
     })
-    
-    print(f"The regression line formula is: y_hat = {slope:.4f} * trip_distance + {intercept:.4f}")
 
+    formula_text = f"The regression line formula is: y_hat = {slope:.4f} * trip_distance + {intercept:.4f}"
+    
+    formula_chart = alt.Chart(pd.DataFrame({'text': [formula_text]})).mark_text(
+        align='center',
+        baseline='middle',
+        fontSize=14
+    ).encode(
+        text='text:N'
+    ).properties(
+        width=600,
+        height=100
+    )
+
+    formula_svg_path = os.path.join(charts_dir, "Regression_Formula_Text.svg")
+    formula_chart.save(formula_svg_path)
+    print(f"Regression formula saved to {formula_svg_path}.")
+    
     print(test_predictions)
 
     # Calculate error metrics
@@ -50,11 +65,28 @@ def main(x_train_path, y_train_path, x_test_path, y_test_path, charts_dir='chart
         'R²': r2_score(y_true, y_pred),
         'MAE': mean_absolute_error(y_true, y_pred)
     }
-    
-    print("\nRegression Performance Metrics:")
-    print(f"RMSE: ${metrics['RMSE']:.2f}")
-    print(f"R²: {metrics['R²']:.3f}")
-    print(f"MAE: ${metrics['MAE']:.2f}")
+
+    metrics_text = (
+        "Regression Performance Metrics:\n"
+        f"RMSE: ${metrics['RMSE']:.2f}\n"
+        f"R²: {metrics['R²']:.3f}\n"
+        f"MAE: ${metrics['MAE']:.2f}"
+    )
+
+    metrics_chart = alt.Chart(pd.DataFrame({'text': [metrics_text]})).mark_text(
+        align='center',
+        baseline='middle',
+        fontSize=14
+    ).encode(
+        text='text:N'
+    ).properties(
+        width=600,
+        height=200
+    )
+
+    metrics_svg_path = os.path.join(charts_dir, "Regression_Performance_Metrics.svg")
+    metrics_chart.save(metrics_svg_path)
+    print(f"Regression performance metrics saved to {metrics_svg_path}.")
 
     error_scatter = alt.Chart(test_predictions).mark_circle(size=60, opacity=0.3).encode(
         x=alt.X('fare_amount', title='Actual Fare Amount ($)'),
