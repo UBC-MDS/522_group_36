@@ -5,6 +5,12 @@ COPY conda-linux-64.lock /tmp/conda-linux-64.lock
 
 USER root
 
+# install lmodern for Quarto PDF rendering
+# RUN sudo apt update \
+#     && sudo apt install -y lmodern
+
+# USER $NB_UID
+
 RUN conda update --quiet --file /tmp/conda-linux-64.lock \
     && conda clean --all -y -f \
     && fix-permissions "${CONDA_DIR}" \
