@@ -55,6 +55,8 @@ Now, we'll perform a summary of the data set that is relevant for exploratory da
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
+from IPython.display import Markdown, display
+
 
 data_set_link = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet"
 # Use only a smaller, random subset (30,000 rows) of the data
@@ -114,7 +116,14 @@ metrics = {
     'MAE': mean_absolute_error(y_true, y_pred)
 }
 
-metrics_df = pd.DataFrame(metrics)
+metrics_df = metrics_df = pd.DataFrame({
+    'Metric': ['RMSE', 'R²', 'MAE'],
+    'Value': [
+        np.sqrt(mean_squared_error(y_true, y_pred)),
+        r2_score(y_true, y_pred),
+        mean_absolute_error(y_true, y_pred)
+    ]
+})
 Markdown(metrics_df.to_markdown(index = False))
 ```
 
