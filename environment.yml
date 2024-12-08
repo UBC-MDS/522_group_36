@@ -30,3 +30,4 @@ dependencies:
    - vegafusion-python-embed==1.6.9
    - vl-convert-python==1.7.0
    - pandera==0.21.0
+   - quarto-cli==1.5.57
