@@ -1,6 +1,9 @@
 # NYC Yellow Taxi Fare Predictor 🚕
 
-In this project we attempt to predict the fare price of yellow taxi trips in NYC using a simple linear regression model that uses trip distance as the independent variable and fare price as the dependent variable.
+
+## About
+
+In this project we attempt to predict the fare price of yellow taxi trips in NYC. First, we analyzed 30,000 NYC yellow taxi trips in January 2024. Then, we determined that we should check how well trip distance predicts the fare price. Using simple linear regression model with trip distance as the independent variable and fare price as the dependent variable, we ended up with a model that predicts that each additional mile travelled is associated with a $3.62 increase in the fare price. The model performed decently well - the R^2 value was 0.848. This means that 84.8% of the variance in the fare prices were explained by our model. If potential NYC taxi customers know how long their trip is, they can use our model to predict their taxi fare price.
 
 ## Usage
 
