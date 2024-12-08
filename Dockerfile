@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64 quay.io/jupyter/minimal-notebook:afe30f0c9ad8
+FROM --platform=linux/amd64 quay.io/jupyter/minimal-notebook:afe30f0c9ad8
 
 COPY conda-linux-64.lock /tmp/conda-linux-64.lock
 #COPY conda-osx-arm64.lock /tmp/conda-osx-arm64.lock
