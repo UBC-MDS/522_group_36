@@ -110,13 +110,7 @@ y_pred = test_predictions['y_pred']
 test_predictions['residuals'] = y_true - y_pred
 test_predictions['abs_residuals'] = np.abs(test_predictions['residuals'])
 
-metrics = {
-    'RMSE': np.sqrt(mean_squared_error(y_true, y_pred)),
-    'R²': r2_score(y_true, y_pred),
-    'MAE': mean_absolute_error(y_true, y_pred)
-}
-
-metrics_df = metrics_df = pd.DataFrame({
+metrics_df = pd.DataFrame({
     'Metric': ['RMSE', 'R²', 'MAE'],
     'Value': [
         np.sqrt(mean_squared_error(y_true, y_pred)),
