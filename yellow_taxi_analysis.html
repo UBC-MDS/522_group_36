@@ -164,7 +164,7 @@ Figure&nbsp;1: Fare Amount Density Chart
 Table&nbsp;1: Data Set Summary
 </figcaption>
 <div aria-describedby="tbl-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="7">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="1">
 <table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 4%">
@@ -393,7 +393,7 @@ Figure&nbsp;2: Correlation Plot
 <section id="modeling" class="level3" data-number="6.3">
 <h3 data-number="6.3" class="anchored" data-anchor-id="modeling"><span class="header-section-number">6.3</span> Modeling</h3>
 <p>As discussed in the Methods summary, we will now build and test our Linear Regression Model.</p>
-<p>The regression line formula is: y_hat = 3.6171602563105036 * trip_distance + 7.020824193004083</p>
+<p>The regression line formula is: y_hat = 3.62 * trip_distance + 7.02</p>
 <p>Finally, let’s calculate some error metrics and perform a visualization of the result of the regression model in the form of a scatter plot with the regression line.</p>
 <div class="cell" data-execution_count="3">
 <div id="tbl-metrics" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
@@ -402,7 +402,7 @@ Figure&nbsp;2: Correlation Plot
 Table&nbsp;2: Regression Performance Metrics
 </figcaption>
 <div aria-describedby="tbl-metrics-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="9">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="3">
 <table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
@@ -445,8 +445,8 @@ Figure&nbsp;3: Predicted vs Actual Taxi Fare Amounts With Error Line
 <section id="results" class="level3" data-number="6.4">
 <h3 data-number="6.4" class="anchored" data-anchor-id="results"><span class="header-section-number">6.4</span> Results</h3>
 <p>The objective of the analysis was to predict the fare amount using a linear regression model. The regression plot, generated from the model, demonstrates a positive linear relationship between trip distance and fare amount for NYC Yellow Taxis in January 2024. This confirms that as the trip distance increases, the fare amount also increases, as expected.</p>
-<p>The linear regression model shows moderate predictive power with an R-squared value of 0.8480521669866172, which explains about high percent of fare variance. The low MAE of 3.237005550862419 USD indicates good accuracy for typical rides, although the higher RMSE (6.782819853611219 USD) suggests sensitivity to outliers. The visual analysis of the errors reveals the model performs best for the 10-50 USD range, and underestimates fares over 100 USD. The actual NYC taxi fare is calculated through initial fare, per-mile charge, and additional fees for peak hours, nighttime, tolls, etc that this model cannot predict, but can be built further using more complicated multilinear regression or ML models.</p>
-<p>Based on the estimated result from the regression line formula derived from the model, this suggests that for each additional mile traveled, the fare increases by approximately 3.6171602563105036 USD, and the base fare (when the trip distance is zero) is around 7.020824193004083 USD.</p>
+<p>The linear regression model shows moderate predictive power with an R-squared value of 0.85, which explains about high percent of fare variance. The low MAE of 3.24 USD indicates good accuracy for typical rides, although the higher RMSE (6.78 USD) suggests sensitivity to outliers. The visual analysis of the errors reveals the model performs best for the 10-50 USD range, and underestimates fares over 100 USD. The actual NYC taxi fare is calculated through initial fare, per-mile charge, and additional fees for peak hours, nighttime, tolls, etc that this model cannot predict, but can be built further using more complicated multilinear regression or ML models.</p>
+<p>Based on the estimated result from the regression line formula derived from the model, this suggests that for each additional mile traveled, the fare increases by approximately 3.62 USD, and the base fare (when the trip distance is zero) is around 7.02 USD.</p>
 <p>To evaluate the model’s predictive performance, we applied it to the test data, which was split from the original dataset (70 percent training, 30 percent testing). The predicted fare amounts were compared against the actual fare amounts in the test set. The predicted values were calculated using the formula derived from the model, where trip distances from the test set were used as input to generate the corresponding fare predictions.</p>
 <p>A scatter plot of the actual fare amounts versus trip distances, along with the regression line, was generated to visualize the results. The plot showed that the model fits most of the data well, but there were some outliers where the predicted fare deviated significantly from the actual values. These discrepancies could be due to errors or special cases in the fare data.</p>
 </section>

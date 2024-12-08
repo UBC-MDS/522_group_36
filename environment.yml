@@ -21,6 +21,8 @@ dependencies:
  - vega_datasets=0.9.0
  - pandas=2.2.3
  - pyarrow==18.1.0
+ - tabulate=0.9.0
+ - quarto=1.5.57
  - pip:
    - plotly==5.24.1
    - pytest==8.3.3
@@ -30,3 +32,5 @@ dependencies:
    - vegafusion-python-embed==1.6.9
    - vl-convert-python==1.7.0
    - pandera==0.21.0
+  #  - tabulate==0.9.0
+  #  - quarto-cli==1.5.57
