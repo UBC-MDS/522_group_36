@@ -1,0 +1,144 @@
+---
+title: "NYC Taxis Fare Prediction Analysis Report"
+author: "Han Wang, Jam Lin, Jiayi Li, Yibin Long"
+format:
+  html:
+    toc: true
+    toc-location: left
+    number-sections: true
+editor: source
+bibliography: references.bib
+execute:
+  echo: false
+---
+
+## Preface
+This report was developed as a deliverable for the term project in DSCI 522 (Data Science Workflows), a course in the Master of Data Science program at the University of British Columbia.
+
+The overall objective of this project was to automate a typical data science workflow. This report summarizes the results of a series of automated Python scripts that handle tasks such as data retrieval, data cleaning, exploratory data analysis (EDA), creation of a predictive machine learning model, and interpretation of the results. The report provides a detailed explanation of each step, applying it to the specific context of the dataset in question. It assumes the reader has a basic understanding of machine learning terminology and concepts.
+
+## Summary
+This report presents a linear regression model developed to predict NYC taxi fare amount. Using data from 30,000 taxi trips in January 2024, we build a linear regression model using trip distance feature, with each additional mile increasing the fare by approximately $3.54. The model was evaluated using a test dataset, where predicted fare amounts were compared to actual fares. While the model performed well overall, some outliers were identified, suggesting the need for further data cleaning and additional features to improve accuracy. Future steps include incorporating more features, experimenting with other regression models like KNN and Lasso regression, and addressing hyperparameters for better generalizability and performance.
+
+## Introduction & Background
+Taking a taxi in New York City can be overwhelming for first-time visitors, especially for tourists unfamiliar with the city's layout and fare system. With over 200,000 taxi trips taking place daily, yellow cabs remain an essential mode of transportation for both locals and visitors. However, the lack of transparency often leads to concerns among tourists about overcharging or being taken on unnecessarily long routes.
+
+To address these concerns, we use data from 30,000 Yellow Taxi trips recorded in January 2024, provided by the NYC Taxi and Limousine Commission (TLC). Our analysis examines how to predict taxi fare amounts, offering valuable insights to help tourists better understand what they should expect to pay for a taxi ride in NYC. By leveraging data-driven analysis, we aim to provide a clearer and more predictable fare structure, enabling tourists to make more informed decisions during their travels in the city.
+
+## Analysis Question
+How do we best predict NYC yellow taxi fare amounts?
+
+## Dataset
+The data set used in this project is the TLC Trip Record Data, which includes taxi and for-hire vehicle trip records collected by technology providers authorized under the Taxicab & Livery Passenger Enhancement Programs (TPEP/LPEP). This data is sourced from the NYC Taxi and Limousine Commission (TLC) and can be accessed from the [NYC Taxi and Limousine Commission's website](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page). Yellow and green taxi trip records contain fields capturing pick-up and drop-off dates and times, pick-up and drop-off locations, trip distances, itemized fares, rate types, payment types, and driver-reported passenger counts. Similarly, For-Hire Vehicle (FHV) trip records include fields such as dispatching base license number, pick-up date and time, and taxi zone location ID. It is important to note that the TLC did not create this data and makes no representations regarding its accuracy. FHV trip records are based on submissions from dispatching bases and may not represent the total volume of trips. Additionally, the TLC reviews these records and enforces necessary actions to improve their accuracy and completeness.
+
+## Methods & Results
+### Methods
+In order to address our research question, we will begin by selecting the appropriate features from the dataset through exploratory data analysis (EDA) and by consulting the data dictionary to better understand the instances within the dataset. Since this is a linear regression modeling problem, we will use the LinearRegression model as our model of choice. Linear regression is a fundamental and widely used method for predictive modeling. The dataset used in this study includes daily fare amounts and trip distance data from January 2024, covering 30,000 observations. The data will be split into training and test sets, with 70% allocated for training and 30% for testing.
+
+The analysis will be conducted using the Python programming language [@Python], with the following Python packages: numpy [@harris2020array], pandas [@pandas], scikit-learn [@pedregosa2011scikit], and altair [@altair].
+
+### EDA
+Lets do some data validation by checking the target variable fare_amount's distribution:
+
+![Fare Amount Density Chart](charts/Fare_Amount_Density_Chart.svg){#fig-density}
+
+Based on @fig-density, we see that most values of the fare amount make sense - they are mostly under $50, with a cluster of fare amounts at around 65 USD, likely a longer trip from the airport. However, we see fare amounts that are lower that 0 which are not explained by the documentation, that "The time-and-distance fare calculated by the meter." They might be simply refunded trips, but since we cannot confirm, we will choose to drop rows where the fare amount is negative.
+
+We'll split the dataset into training set and test set.
+
+Now, we'll perform a summary of the data set that is relevant for exploratory data analysis related to our regression analysis. We'll check out the summary statistics for each column in the dataset.
+
+```{python}
+#| label: tbl-summary
+#| tbl-cap: Data Set Summary
+
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from IPython.display import Markdown, display
+
+
+data_set_link = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet"
+# Use only a smaller, random subset (30,000 rows) of the data
+df = pd.read_parquet(data_set_link).sample(30000, random_state=123)
+df = df[df['fare_amount'] >= 0]
+train_df, test_df = train_test_split(df, test_size=0.3, random_state=123)
+X_train, y_train = train_df['trip_distance'].values.reshape(-1,1), train_df['fare_amount'].values
+X_test, y_test = test_df['trip_distance'].values.reshape(-1,1), test_df['fare_amount'].values
+train_df_describe = train_df.describe()
+Markdown(train_df_describe.to_markdown(index = False))
+```
+
+Based on the summary statistics in @tbl-summary, for the fare amount, the mean fare amount is 18.59 USD, while the median is 12.8 USD, which again points to a right-skewed distribution for this column. This confirms what we saw with the density chart.
+
+Next, we'll create a correlation plot of all of the columns against one another, to check out the strength and direction of associations between columns.
+
+![Correlation Plot](charts/Correlation_Plot_Train_Spearman.svg){#fig-correlation}
+
+Based on @fig-correlation, we see that "trip_distance" and "fare_amount" have a fairly high positive correlation, which may indicate that they are fairly positively associated with each other. We decide now to use "trip_distance" to try and predict "fare_amount". Since there are no null values in "trip_distance", no null values need to be dropped for "trip_distance".
+
+### Modeling
+As discussed in the Methods summary, we will now build and test our Linear Regression Model.
+
+```{python}
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+intercept = model.intercept_
+slope = model.coef_[0]
+
+test_predictions = pd.DataFrame({
+    'trip_distance': X_test.flatten(),
+    'fare_amount': y_test,
+    'y_pred': model.predict(X_test)
+})
+```
+
+The regression line formula is: y_hat = `{python} round(slope, 2)` * trip_distance + `{python} round(intercept, 2)`
+
+Finally, let's calculate some error metrics and perform a visualization of the result of the regression model in the form of a scatter plot with the regression line.
+
+```{python}
+#| label: tbl-metrics
+#| tbl-cap: Regression Performance Metrics
+
+y_true = test_predictions['fare_amount']
+y_pred = test_predictions['y_pred']
+test_predictions['residuals'] = y_true - y_pred
+test_predictions['abs_residuals'] = np.abs(test_predictions['residuals'])
+
+metrics_df = pd.DataFrame({
+    'Metric': ['RMSE', 'R²', 'MAE'],
+    'Value': [
+        np.sqrt(mean_squared_error(y_true, y_pred)),
+        r2_score(y_true, y_pred),
+        mean_absolute_error(y_true, y_pred)
+    ]
+})
+Markdown(metrics_df.to_markdown(index = False))
+```
+
+![Predicted vs Actual Taxi Fare Amounts With Error Line](charts/Pred_Vs_Actual.svg){#fig-error}
+
+Lastly in @fig-predictions, here is the regression line for the predictions.
+![Regression of Trip Distance vs Fare Amount for NYC Yellow Taxis in January 2024](charts/Final_Linear_Regression.svg){#fig-predictions}
+
+### Results
+The objective of the analysis was to predict the fare amount using a linear regression model. The regression plot, generated from the model, demonstrates a positive linear relationship between trip distance and fare amount for NYC Yellow Taxis in January 2024. This confirms that as the trip distance increases, the fare amount also increases, as expected.
+
+The linear regression model shows moderate predictive power with an R-squared value of `{python} round(r2_score(y_true, y_pred), 2)`, which explains about high percent of fare variance. The low MAE of `{python} round(mean_absolute_error(y_true, y_pred), 2)` USD indicates good accuracy for typical rides, although the higher RMSE (`{python} round(np.sqrt(mean_squared_error(y_true, y_pred)), 2)` USD) suggests sensitivity to outliers. The visual analysis of the errors reveals the model performs best for the 10-50 USD range, and underestimates fares over 100 USD. The actual NYC taxi fare is calculated through initial fare, per-mile charge, and additional fees for peak hours, nighttime, tolls, etc that this model cannot predict, but can be built further using more complicated multilinear regression or ML models.
+
+Based on the estimated result from the regression line formula derived from the model, this suggests that for each additional mile traveled, the fare increases by approximately `{python} round(slope, 2)` USD, and the base fare (when the trip distance is zero) is around `{python} round(intercept, 2)` USD.
+
+To evaluate the model's predictive performance, we applied it to the test data, which was split from the original dataset (70 percent training, 30 percent testing). The predicted fare amounts were compared against the actual fare amounts in the test set. The predicted values were calculated using the formula derived from the model, where trip distances from the test set were used as input to generate the corresponding fare predictions.
+
+A scatter plot of the actual fare amounts versus trip distances, along with the regression line, was generated to visualize the results. The plot showed that the model fits most of the data well, but there were some outliers where the predicted fare deviated significantly from the actual values. These discrepancies could be due to errors or special cases in the fare data.
+
+## Limitations & Next Steps
+Overall, our model may be useful in the initial analysis of tourists interested in making informal predictions about NYC taxi fare amounts. However, there are several areas where this work can be improved. In this analysis, we did not include hyperparameters like the regularization parameter (α), which is essential for controlling overfitting and improving model generalizability. Furthermore, the model currently uses only a single feature (trip distance), which may result in underfitting and bias. In the next steps, we plan to incorporate more features into the model and refine the approach to improve its precision and predictive power. Additionally, experimenting with other regression models, such as KNN regression for non-linear relationships and Lasso regression for linear relationships, could be valuable to see if these models improve performance.
+
+\newpage
+## References
