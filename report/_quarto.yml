@@ -1,0 +1,14 @@
+project:
+  type: website  
+  output-dir: ../docs  
+
+format:
+  html:
+    toc: true              
+    toc-location: left     
+    number-sections: true   
+
+bibliography: references.bib  
+
+execute:
+  echo: false            
