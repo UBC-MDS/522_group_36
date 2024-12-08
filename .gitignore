@@ -1,5 +1,0 @@
-# Ignore Checkpoints
-.ipynb_checkpoints/
-data/.ipynb_checkpoints/
-results/.ipynb_checkpoints/
-logs/
