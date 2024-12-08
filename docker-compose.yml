@@ -1,0 +1,14 @@
+services:
+  taxi_fare_predictor:
+    build: .
+    platform: linux/amd64
+    image: lixuanlin/taxi-fare-predictor:latest
+    #image: local-taxi-predictor
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/home/jovyan
+    deploy:
+      resources:
+        limits:
+          memory: 5G
