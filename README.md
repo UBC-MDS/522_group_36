@@ -1,6 +1,13 @@
 # NYC Yellow Taxi Fare Predictor 🚕
 
-In this project we attempt to predict the fare price of yellow taxi trips in NYC using a simple linear regression model that uses trip distance as the independent variable and fare price as the dependent variable.
+
+## About
+
+In this project we attempt to predict the fare price of yellow taxi trips in NYC. First, we analyzed 30,000 NYC yellow taxi trips in January 2024. Then, we determined that we should check how well trip distance predicts the fare price. Using simple linear regression model with trip distance as the independent variable and fare price as the dependent variable, we ended up with a model that predicts that each additional mile travelled is associated with a $3.62 increase in the fare price. The model performed decently well - the R^2 value was 0.848. This means that 84.8% of the variance in the fare prices were explained by our model. If potential NYC taxi customers know how long their trip is, they can use our model to predict their taxi fare price.
+
+## Report
+
+The final report can be found [here](https://UBC-MDS.github.io/DSCI_522_Group36_taxi_fare_predictor/).
 
 ## Usage
 
@@ -60,11 +67,15 @@ In this project we attempt to predict the fare price of yellow taxi trips in NYC
    ```
    python scripts/modeling.py --x-train-path data/processed/X_train.csv --y-train-path data/processed/y_train.csv --x-test-path data/processed/X_test.csv --y-test-path data/processed/y_test.csv
    ```
-   
 
-7. **Restart the kernel and run all cells to see the analysis**
+7. **Render Quarto**
 
-   under the "Kernel" menu click "Restart Kernel and Run All Cells..."
+   To render the Quarto document to HTML and PDF:
+
+   ```
+   quarto render report/breast_cancer_predictor_report.qmd --to html
+   quarto render report/breast_cancer_predictor_report.qmd --to pdf
+   ``` 
 
 ### Clean up
 
@@ -75,6 +86,8 @@ In this project we attempt to predict the fare price of yellow taxi trips in NYC
 ### Developer dependencies
 - `conda` (version 23.9.0 or higher)
 - `conda-lock` (version 2.5.7 or higher)
+
+Additional dependencies are specified in the [`Dockerfile`](Dockerfile) and [`environment.yml`](environment.yml).
 
 ### Adding a new dependency
 
@@ -102,6 +115,7 @@ In this project we attempt to predict the fare price of yellow taxi trips in NYC
 This project is licensed under the MIT license for the project code and the Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0) license for the project report - see the LICENSE file for more details.
 
 ## References
+
 Charles R Harris, K Jarrod Millman, Stéfan J van der Walt, Ralf Gommers, Pauli Virtanen, David Cournapeau, Eric Wieser, Julian Taylor, Sebastian Berg, Nathaniel J Smith, Robert Kern, Matti Picus, Stephan Hoyer, Marten H van Kerkwijk, Matthew Brett, Allan Haldane, Jaime Fernández del Río, Mark Wiebe, Pearu Peterson, Pierre Gérard-Marchant, Kevin Sheppard, Tyler Reddy, Warren Weckesser, Hameer Abbasi, Christoph Gohlke, and Travis E Oliphant. Array programming with NumPy. Nature, 585(7825):357–362, 2020. URL: https://doi.org/10.1038/s41586-020-2649-2, doi:10.1038/s41586-020-2649-2.
 
 F. Pedregosa, G. Varoquaux, A. Gramfort, V. Michel, B. Thirion, O. Grisel, M. Blondel, P. Prettenhofer, R. Weiss, V. Dubourg, J. Vanderplas, A. Passos, D. Cournapeau, M. Brucher, M. Perrot, and E. Duchesnay. Scikit-learn: Machine Learning in Python. Journal of Machine Learning Research, 12:2825–2830, 2011.
