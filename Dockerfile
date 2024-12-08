@@ -21,8 +21,8 @@ RUN conda update --quiet --file /tmp/conda-linux-64.lock && \
 
 # Install deepchecks
 RUN pip install deepchecks==0.18.1
-RUN pip install quarto-cli==1.5.57
-RUN pip install tabulate==0.9.0
+# RUN pip install quarto-cli==1.5.57
+# RUN pip install tabulate==0.9.0
 
 # Final user setting
 USER $NB_UID
