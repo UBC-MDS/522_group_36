@@ -6,7 +6,7 @@ USER root
 
 # Install lmodern and create necessary directories
 RUN apt update && \
-    apt install -y lmodern && \
+    apt install -y lmodern librsvg2-bin && \
     mkdir -p /home/jovyan/.cache/conda && \
     chown -R $NB_UID:$NB_GID /home/jovyan/.cache && \
     fix-permissions "${CONDA_DIR}" && \
