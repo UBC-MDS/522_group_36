@@ -68,8 +68,8 @@ class TaxiDataAnalyzer:
             .properties(title=title, width=600, height=400)
         )
 
-        # Save the chart as SVG
-        file_path = os.path.join(self.charts_dir, f"{title.replace(' ', '_')}.svg")
+        # Save the chart as PNG
+        file_path = os.path.join(self.charts_dir, f"{title.replace(' ', '_')}.png")
         chart.save(file_path)
         print(f"Density chart saved to {file_path}.")
 
@@ -173,9 +173,9 @@ class TaxiDataAnalyzer:
             .properties(width=df.shape[0])
         )
 
-        # Save the chart as SVG
+        # Save the chart as PNG
         file_path = os.path.join(
-            self.charts_dir, f"Missing_Values_Heatmap_{subset.capitalize()}.svg"
+            self.charts_dir, f"Missing_Values_Heatmap_{subset.capitalize()}.png"
         )
         missing_value_chart.save(file_path)
         print(f"Missing values heatmap saved to {file_path}.")
@@ -234,10 +234,10 @@ class TaxiDataAnalyzer:
             )
         )
 
-        # Save the chart as SVG
+        # Save the chart as PNG
         file_path = os.path.join(
             self.charts_dir,
-            f"Correlation_Plot_{subset.capitalize()}_{method.capitalize()}.svg",
+            f"Correlation_Plot_{subset.capitalize()}_{method.capitalize()}.png",
         )
         correlation_chart.save(file_path)
         print(f"Correlation plot saved to {file_path}.")
