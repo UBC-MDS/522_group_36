@@ -15,7 +15,7 @@ The final report can be found [here](https://UBC-MDS.github.io/DSCI_522_Group36_
 
 > If you are using Windows or Mac, make sure Docker Desktop is running.
 
-### Running the analysis
+### Running the Analysis
 
 1. **Clone the repository and navigate to the root of this project**:
     ```bash
