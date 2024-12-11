@@ -48,7 +48,7 @@ def main(x_train_path, y_train_path, x_test_path, y_test_path, charts_dir='chart
         height=100
     )
 
-    formula_svg_path = os.path.join(charts_dir, "Regression_Formula_Text.svg")
+    formula_svg_path = os.path.join(charts_dir, "Regression_Formula_Text.png")
     formula_chart.save(formula_svg_path)
     print(f"Regression formula saved to {formula_svg_path}.")
     
@@ -84,7 +84,7 @@ def main(x_train_path, y_train_path, x_test_path, y_test_path, charts_dir='chart
         height=200
     )
 
-    metrics_svg_path = os.path.join(charts_dir, "Regression_Performance_Metrics.svg")
+    metrics_svg_path = os.path.join(charts_dir, "Regression_Performance_Metrics.png")
     metrics_chart.save(metrics_svg_path)
     print(f"Regression performance metrics saved to {metrics_svg_path}.")
 
@@ -106,7 +106,7 @@ def main(x_train_path, y_train_path, x_test_path, y_test_path, charts_dir='chart
     
     combined_chart = error_scatter + error_diagonal
 
-    combined_chart_path = os.path.join(charts_dir, "Pred_Vs_Actual.svg")
+    combined_chart_path = os.path.join(charts_dir, "Pred_Vs_Actual.png")
 
     combined_chart.save(combined_chart_path)
     print(f"Error scatter and diagonal chart saved to {combined_chart_path}.")
@@ -127,7 +127,7 @@ def main(x_train_path, y_train_path, x_test_path, y_test_path, charts_dir='chart
     
     final_chart = scatter_plot + line_plot
     
-    final_chart_path = os.path.join(charts_dir, "Final_Linear_Regression.svg")
+    final_chart_path = os.path.join(charts_dir, "Final_Linear_Regression.png")
 
     final_chart.save(final_chart_path)
     print(f"Final Linear Regression Chart saved to {final_chart_path}.")
