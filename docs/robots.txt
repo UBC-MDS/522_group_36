@@ -1,0 +1,1 @@
+Sitemap: https://UBC-MDS.github.io/DSCI_522_Group36_taxi_fare_predictor/sitemap.xml

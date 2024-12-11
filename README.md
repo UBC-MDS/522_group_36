@@ -73,7 +73,7 @@ The final report can be found [here](https://UBC-MDS.github.io/DSCI_522_Group36_
    To render the Quarto document to HTML and PDF:
 
    ```
-   quarto render report/yellow_taxi_analysis.qmd --to html
+   quarto render report/yellow-taxi-analysis.qmd --to html
    quarto render report/yellow_taxi_analysis.qmd --to pdf
    ``` 
 

@@ -44,26 +44,61 @@ div.csl-indent {
 }</style>
 
 
-<script src="yellow_taxi_analysis_files/libs/clipboard/clipboard.min.js"></script>
-<script src="yellow_taxi_analysis_files/libs/quarto-html/quarto.js"></script>
-<script src="yellow_taxi_analysis_files/libs/quarto-html/popper.min.js"></script>
-<script src="yellow_taxi_analysis_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="yellow_taxi_analysis_files/libs/quarto-html/anchor.min.js"></script>
-<link href="yellow_taxi_analysis_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="yellow_taxi_analysis_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="yellow_taxi_analysis_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="yellow_taxi_analysis_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="yellow_taxi_analysis_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
 
 </head>
 
-<body>
+<body class="floating">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
-<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
-  <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface"><span class="header-section-number">1</span> Preface</a></li>
@@ -82,9 +117,12 @@ div.csl-indent {
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">8</span> References</a></li>
   </ul>
 </nav>
-</div>
-<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-</div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -393,7 +431,7 @@ Figure&nbsp;2: Correlation Plot
 <section id="modeling" class="level3" data-number="6.3">
 <h3 data-number="6.3" class="anchored" data-anchor-id="modeling"><span class="header-section-number">6.3</span> Modeling</h3>
 <p>As discussed in the Methods summary, we will now build and test our Linear Regression Model.</p>
-<p>The regression line formula is: y_hat = np.float64(3.62) * trip_distance + np.float64(7.02)</p>
+<p>The regression line formula is: y_hat = 3.62 * trip_distance + 7.02</p>
 <p>Finally, let’s calculate some error metrics and perform a visualization of the result of the regression model in the form of a scatter plot with the regression line.</p>
 <div class="cell" data-execution_count="3">
 <div id="tbl-metrics" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
@@ -455,8 +493,8 @@ Figure&nbsp;4: Regression of Trip Distance vs Fare Amount for NYC Yellow Taxis i
 <section id="results" class="level3" data-number="6.4">
 <h3 data-number="6.4" class="anchored" data-anchor-id="results"><span class="header-section-number">6.4</span> Results</h3>
 <p>The objective of the analysis was to predict the fare amount using a linear regression model. The regression plot, generated from the model, demonstrates a positive linear relationship between trip distance and fare amount for NYC Yellow Taxis in January 2024. This confirms that as the trip distance increases, the fare amount also increases, as expected.</p>
-<p>The linear regression model shows moderate predictive power with an R-squared value of 0.85, which explains about high percent of fare variance. The low MAE of np.float64(3.24) USD indicates good accuracy for typical rides, although the higher RMSE (np.float64(6.78) USD) suggests sensitivity to outliers. The visual analysis of the errors reveals the model performs best for the 10-50 USD range, and underestimates fares over 100 USD. The actual NYC taxi fare is calculated through initial fare, per-mile charge, and additional fees for peak hours, nighttime, tolls, etc that this model cannot predict, but can be built further using more complicated multilinear regression or ML models.</p>
-<p>Based on the estimated result from the regression line formula derived from the model, this suggests that for each additional mile traveled, the fare increases by approximately np.float64(3.62) USD, and the base fare (when the trip distance is zero) is around np.float64(7.02) USD.</p>
+<p>The linear regression model shows moderate predictive power with an R-squared value of 0.85, which explains about high percent of fare variance. The low MAE of 3.24 USD indicates good accuracy for typical rides, although the higher RMSE (6.78 USD) suggests sensitivity to outliers. The visual analysis of the errors reveals the model performs best for the 10-50 USD range, and underestimates fares over 100 USD. The actual NYC taxi fare is calculated through initial fare, per-mile charge, and additional fees for peak hours, nighttime, tolls, etc that this model cannot predict, but can be built further using more complicated multilinear regression or ML models.</p>
+<p>Based on the estimated result from the regression line formula derived from the model, this suggests that for each additional mile traveled, the fare increases by approximately 3.62 USD, and the base fare (when the trip distance is zero) is around 7.02 USD.</p>
 <p>To evaluate the model’s predictive performance, we applied it to the test data, which was split from the original dataset (70 percent training, 30 percent testing). The predicted fare amounts were compared against the actual fare amounts in the test set. The predicted values were calculated using the formula derived from the model, where trip distances from the test set were used as input to generate the corresponding fare predictions.</p>
 <p>A scatter plot of the actual fare amounts versus trip distances, along with the regression line, was generated to visualize the results. The plot showed that the model fits most of the data well, but there were some outliers where the predicted fare deviated significantly from the actual values. These discrepancies could be due to errors or special cases in the fare data.</p>
 </section>
@@ -465,7 +503,9 @@ Figure&nbsp;4: Regression of Trip Distance vs Fare Amount for NYC Yellow Taxis i
 <h2 data-number="7" class="anchored" data-anchor-id="limitations-next-steps"><span class="header-section-number">7</span> Limitations &amp; Next Steps</h2>
 <p>Overall, our model may be useful in the initial analysis of tourists interested in making informal predictions about NYC taxi fare amounts. However, there are several areas where this work can be improved. In this analysis, we did not include hyperparameters like the regularization parameter (α), which is essential for controlling overfitting and improving model generalizability. Furthermore, the model currently uses only a single feature (trip distance), which may result in underfitting and bias. In the next steps, we plan to incorporate more features into the model and refine the approach to improve its precision and predictive power. Additionally, experimenting with other regression models, such as KNN regression for non-linear relationships and Lasso regression for linear relationships, could be valuable to see if these models improve performance.</p>
 </section>
-<section id="references" class="level2 unnumbered" data-number="8">
+<section id="references" class="level2" data-number="8">
+
+
 
 
 </section>
@@ -489,8 +529,7 @@ Van Rossum, Guido, and Fred L. Drake. 2009. <em>Python 3 Reference Manual</em>. 
 <div id="ref-altair" class="csl-entry" role="listitem">
 VanderPlas, Jake. 2018. <span>“Altair: Interactive Statistical Visualizations for Python.”</span> <em>Journal of Open Source Software</em> 3 (7825, 32): 1057. <a href="https://doi.org/10.21105/joss.01057">https://doi.org/10.21105/joss.01057</a>.
 </div>
-</div></section></div></main>
-<!-- /main column -->
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -583,7 +622,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/UBC-MDS\.github\.io\/DSCI_522_Group36_taxi_fare_predictor\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
