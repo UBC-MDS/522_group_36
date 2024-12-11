@@ -30,7 +30,7 @@ def download_and_save_data(data_set_link, output_csv, sample_size=30000, random_
               default="https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet",
               help='URL or file path to the parquet dataset')
 @click.option('--output-csv', '-o', 
-              default='data/yellow_tripdata_2024-01.csv',
+              default='data/raw/yellow_tripdata_2024-01.csv',
               help='File path where the CSV will be saved')
 @click.option('--sample-size', '-n', 
               default=30000, 
