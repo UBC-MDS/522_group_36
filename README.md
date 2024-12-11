@@ -3,7 +3,7 @@
 
 ## About
 
-In this project we attempt to predict the fare price of yellow taxi trips in NYC. First, we analyzed 30,000 NYC yellow taxi trips in January 2024. Then, we determined that we should check how well trip distance predicts the fare price. Using simple linear regression model with trip distance as the independent variable and fare price as the dependent variable, we ended up with a model that predicts that each additional mile travelled is associated with a $3.62 increase in the fare price. The model performed decently well - the R^2 value was 0.848. This means that 84.8% of the variance in the fare prices were explained by our model. If potential NYC taxi customers know how long their trip is, they can use our model to predict their taxi fare price.
+This project predicts NYC yellow taxi fare prices based on trip distance. Analyzing 30,000 NYC yellow taxi trips in January 2024, we used a simple linear regression model where trip distance predicts fare price. The resulting model predicts that each additional mile travelled is associated with a $3.62 increase in the fare price. The model performed decently well - the R^2 value was 0.848. This means that 84.8% of the variance in the fare prices was explained by trip distance. This model could be useful for NYC taxi customers who know how long their taxi trip is going to be - they can use our model to predict their taxi fare price.
 
 ## Report
 
@@ -73,8 +73,8 @@ The final report can be found [here](https://UBC-MDS.github.io/DSCI_522_Group36_
    To render the Quarto document to HTML and PDF:
 
    ```
-   quarto render report/breast_cancer_predictor_report.qmd --to html
-   quarto render report/breast_cancer_predictor_report.qmd --to pdf
+   quarto render report/yellow_taxi_analysis.qmd --to html
+   quarto render report/yellow_taxi_analysis.qmd --to pdf
    ``` 
 
 ### Clean up
