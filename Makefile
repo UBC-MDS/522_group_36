@@ -63,7 +63,7 @@ charts/Final_Linear_Regression.png: data/processed/X_train.csv data/processed/y_
 		--y-test-path data/processed/y_test.csv
 
 # write the report
-report/yellow-taxi-analysis.html : report/yellow_taxi_analysis.qmd \
+report/yellow_taxi_analysis.html : report/yellow_taxi_analysis.qmd \
 charts/Fare_Amount_Density_Chart.png \
 charts/Missing_Values_Heatmap_Train.png \
 charts/Correlation_Plot_Train_Spearman.png \
