@@ -3,3 +3,13 @@
 data/.ipynb_checkpoints/
 results/.ipynb_checkpoints/
 logs/
+**/__pycache__/
+.DS_Store
+.cache/
+.pytest_cache/
+.local/
+.ipython/
+.config/
+.quarto/
+.jupyter/
+.bash_history
