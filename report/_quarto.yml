@@ -1,14 +1,19 @@
 project:
-  type: website  
-  output-dir: ../docs  
+  type: website
+  output-dir: _site
+  render:
+    - report/index.qmd
+
+website:
+  title: "NYC Taxis Fare Prediction Analysis Report"
 
 format:
   html:
-    toc: true              
-    toc-location: left     
-    number-sections: true   
-
-bibliography: references.bib  
-
-execute:
-  echo: false            
+    toc: true
+    toc-location: left
+    number-sections: true
+    fig-format: png    # Explicitly specify PNG format
+    execute:
+      echo: false
+    resources:
+      - charts/        # Include charts directory as a resource
