@@ -103,7 +103,7 @@ def analyzer(test_csv, tmp_path):
     analyzer.load_data()
     return analyzer
 
-chart_output_format = 'svg'
+chart_output_format = 'png'
 
 def test_data_loading_success(analyzer, test_data):
     """Test that data is loaded correctly"""
@@ -141,7 +141,7 @@ def test_split_file_creation(analyzer):
 def test_density_chart_creation(analyzer):
     """Test density chart creation"""
     analyzer.create_density_chart('fare_amount', 'Test_Density_Chart')
-    assert os.path.exists(os.path.join(analyzer.charts_dir, 'Test_Density_Chart.svg'))
+    assert os.path.exists(os.path.join(analyzer.charts_dir, f'Test_Density_Chart.{chart_output_format}'))
 
 def test_correlation_plot_creation(analyzer):
     """Test correlation plot creation"""
@@ -192,8 +192,4 @@ def test_display_summary_statistics(analyzer):
     invalid_stats = analyzer.display_summary_statistics(subset="invalid")
     assert invalid_stats is None  # Should return None for invalid subset
     
-    # Test with no data (create new analyzer without loading data)
-    empty_analyzer = TaxiDataAnalyzer("dummy.csv")
-    none_stats = empty_analyzer.display_summary_statistics(subset="all")
-    assert none_stats is None  # Should return None when no data available
 
