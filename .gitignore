@@ -3,8 +3,10 @@
 data/.ipynb_checkpoints/
 results/.ipynb_checkpoints/
 logs/
-__pycache__/
+**pycache**/
 .DS_Store
 *_cache/
 *_files/
 .quarto/
+.jupyter/
+.bash_history
