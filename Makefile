@@ -1,82 +1,91 @@
 # Makefile
 # Lixuan Lin, Dec 2024
 
-# This driver script completes the textual analysis of
-# 3 novels and creates figures on the 10 most frequently
-# occuring words from each of the 3 novels. This script
-# takes no arguments.
+# This script completes the analysis of taxi fare predictor
+# and builds a regression model to predict the taxi fare.
+# This script takes no arguments.
 
 # example usage:
 # make all
 
-.PHONY: all clean fig
+.PHONY: all clean
 
-all : report/count_report.html
+all : report/yellow_taxi_analysis.html report/yellow_taxi_analysis.pdf
 
 # download data
-data/raw/yellow_tripdata_2024-01.csv : 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet' scripts/download_data.py
-	python scripts/download_data.py \
-		--input_file='https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet' \
-		--output_file=data/raw/yellow_tripdata_2024-01.csv
+data/raw/yellow_tripdata_2024-01.csv : scripts/download_data.py
+	python -m scripts.download_data
 
 # data validation
 data/processed/yellow_tripdata_2024-01_validated.csv : data/raw/yellow_tripdata_2024-01.csv scripts/run_validation.py
-	python scripts/run_validation.py \
-		--input_file=data/raw/yellow_tripdata_2024-01.csv \
-		--output_file=data/processed/yellow_tripdata_2024-01_validated.csv
+	python -m scripts.run_validation
 
 # eda
 charts/Fare_Amount_Density_Chart.png: data/processed/yellow_tripdata_2024-01_validated.csv scripts/run_eda.py
-	python scripts/run_eda.py \
-		--input_file=data/processed/yellow_tripdata_2024-01_validated.csv \
-		--output_file=charts/Fare_Amount_Density_Chart.png
+	python -m scripts.run_eda run-all data/processed/yellow_tripdata_2024-01_validated.csv \
+		--charts_dir charts
 
 charts/Missing_Values_Heatmap_Train.png: data/processed/yellow_tripdata_2024-01_validated.csv scripts/run_eda.py
-	python scripts/run_eda.py \
-		--input_file=data/processed/yellow_tripdata_2024-01_validated.csv \
-		--output_file=charts/Missing_Values_Heatmap_Train.png
+	python -m scripts.run_eda run-all data/processed/yellow_tripdata_2024-01_validated.csv \
+		--charts_dir charts
 
 charts/Correlation_Plot_Train_Spearman.png: data/processed/yellow_tripdata_2024-01_validated.csv scripts/run_eda.py
-	python scripts/run_eda.py \
-		--input_file=data/processed/yellow_tripdata_2024-01_validated.csv \
-		--output_file=charts/Correlation_Plot_Train_Spearman.png
+	python -m scripts.run_eda run-all data/processed/yellow_tripdata_2024-01_validated.csv \
+		--charts_dir charts
 
 # modeling
-charts/Regression_Formula_Text.png: data/processed/X_train.csv scripts/modeling.py
+charts/Regression_Formula_Text.png: data/processed/X_train.csv data/processed/y_train.csv data/processed/X_test.csv data/processed/y_test.csv scripts/modeling.py
 	python scripts/modeling.py \
-		--input_file=data/processed/X_train.csv \
-		--output_file=charts/Regression_Formula_Text.png
+		--x-train-path data/processed/X_train.csv \
+		--y-train-path data/processed/y_train.csv \
+		--x-test-path data/processed/X_test.csv \
+		--y-test-path data/processed/y_test.csv
 
-charts/Regression_Performance_Metrics.png: data/processed/X_train.csv scripts/modeling.py
+charts/Regression_Performance_Metrics.png: data/processed/X_train.csv data/processed/y_train.csv data/processed/X_test.csv data/processed/y_test.csv scripts/modeling.py
 	python scripts/modeling.py \
-		--input_file=data/processed/X_train.csv \
-		--output_file=charts/Regression_Performance_Metrics.png
+		--x-train-path data/processed/X_train.csv \
+		--y-train-path data/processed/y_train.csv \
+		--x-test-path data/processed/X_test.csv \
+		--y-test-path data/processed/y_test.csv
 
-charts/Pred_Vs_Actual.png: data/processed/X_train.csv scripts/modeling.py
+charts/Pred_Vs_Actual.png: data/processed/X_train.csv data/processed/y_train.csv data/processed/X_test.csv data/processed/y_test.csv scripts/modeling.py
 	python scripts/modeling.py \
-		--input_file=data/processed/X_train.csv \
-		--output_file=charts/Pred_Vs_Actual.png
+		--x-train-path data/processed/X_train.csv \
+		--y-train-path data/processed/y_train.csv \
+		--x-test-path data/processed/X_test.csv \
+		--y-test-path data/processed/y_test.csv
 
-charts/Final_Linear_Regression.png: data/processed/X_train.csv scripts/modeling.py
+charts/Final_Linear_Regression.png: data/processed/X_train.csv data/processed/y_train.csv data/processed/X_test.csv data/processed/y_test.csv scripts/modeling.py
 	python scripts/modeling.py \
-		--input_file=data/processed/X_train.csv \
-		--output_file=charts/Final_Linear_Regression.png
+		--x-train-path data/processed/X_train.csv \
+		--y-train-path data/processed/y_train.csv \
+		--x-test-path data/processed/X_test.csv \
+		--y-test-path data/processed/y_test.csv
 
 # write the report
-report/count_report.html : report/count_report.qmd \
-results/figure/isles.png \
-results/figure/abyss.png \
-results/figure/last.png \
-results/figure/sierra.png
-    quarto render report/count_report.qmd
+report/yellow-taxi-analysis.html : report/yellow_taxi_analysis.qmd \
+charts/Fare_Amount_Density_Chart.png \
+charts/Missing_Values_Heatmap_Train.png \
+charts/Correlation_Plot_Train_Spearman.png \
+charts/Regression_Formula_Text.png \
+charts/Regression_Performance_Metrics.png \
+charts/Pred_Vs_Actual.png \
+charts/Final_Linear_Regression.png
+	quarto render report/yellow_taxi_analysis.qmd --to html
+	quarto render report/yellow_taxi_analysis.qmd --to pdf
+
+# example usage:
+# make clean
 
 clean :
-    rm -f results/isles.dat \
-        results/abyss.dat \
-        results/last.dat \
-        results/sierra.dat
-    rm -f results/figure/isles.png \
-        results/figure/abyss.png \
-        results/figure/last.png \
-        results/figure/sierra.png
-    rm -rf report/count_report.html
+	rm -f data/raw/yellow_tripdata_2024-01.csv \
+		data/processed/yellow_tripdata_2024-01_validated.csv
+	rm -f charts/Fare_Amount_Density_Chart.png \
+		charts/Missing_Values_Heatmap_Train.png \
+        charts/Correlation_Plot_Train_Spearman.png \
+        charts/Regression_Formula_Text.png \
+		charts/Regression_Performance_Metrics.png \
+		charts/Pred_Vs_Actual.png \
+		charts/Final_Linear_Regression.png
+	rm -rf report/yellow-taxi-analysis.html \
+		report/yellow-taxi-analysis.pdf
