@@ -6,6 +6,7 @@ format:
     toc: true
     toc-location: left
     number-sections: true
+    embed-resources: true
 editor: source
 bibliography: references.bib
 execute:
