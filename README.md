@@ -11,6 +11,8 @@ The final report can be found [here](https://UBC-MDS.github.io/DSCI_522_Group36_
 
 ## Usage
 
+## Option 1: Using Docker
+
 ### Setup
 
 > If you are using Windows or Mac, make sure Docker Desktop is running.
@@ -62,8 +64,7 @@ The final report can be found [here](https://UBC-MDS.github.io/DSCI_522_Group36_
 6. **Run the eda analysis**
    
     ```
-    python -m scripts.run_eda run-all data/processed/yellow_tripdata_2024-01_validated.csv \
-    --charts_dir charts
+    python -m scripts.run_eda run-all data/processed/yellow_tripdata_2024-01_validated.csv --charts_dir charts
     ```
 
 7. **Run the model**
@@ -80,10 +81,29 @@ The final report can be found [here](https://UBC-MDS.github.io/DSCI_522_Group36_
    quarto render report/yellow_taxi_analysis.qmd --to html
    quarto render report/yellow_taxi_analysis.qmd --to pdf
    ``` 
-
 ### Clean up
 
-1. To shut down the container and clean up the resources, type `Cntrl` + `C` in the terminal where you launched the container, and then type `docker compose rm`
+To shut down the container and clean up the resources, type `Cntrl` + `C` in the 
+terminal where you launched the container, and then type `docker compose rm`
+
+
+## Option 2: Without using Docker
+
+1. To replicate the analysis, clone this GitHub repository, install the
+dependencies listed below, and run the following command at the command line/terminal 
+from the root directory of this project:
+
+    ```
+    make all
+    ```
+
+2. To reset the repo to a clean state, with no intermediate or results
+files, run the following command at the command line/terminal from the
+root directory of this project:
+
+    ```
+    make clean
+    ```
 
 ## Developer notes
 
