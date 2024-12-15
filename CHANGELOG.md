@@ -9,6 +9,7 @@ The changes to this project will be documented in this file.
 
 ### Changed
 - Exported scripts required to run the analysis into functions.
+- Moved around files in the repository to make it more organized.
 
 ### Fixed
 - Resolved an issue causing crashes in A. TODO: Either add to or remove this
