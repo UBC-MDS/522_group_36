@@ -3,6 +3,7 @@
 import sys
 import os
 import yaml
+import click
 from src.validation.validate import DataValidator
 
 def load_config(config_path: str) -> dict:
@@ -20,6 +21,7 @@ def load_config(config_path: str) -> dict:
         print(f"Error loading config file: {e}")
         sys.exit(1)
 
+@click.command()
 def main():
     # Add the project root to sys.path
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))

@@ -3,7 +3,7 @@ import pandas as pd
 import altair as alt
 from sklearn.model_selection import train_test_split
 import pandera as pa
-from src.schema_postEDA import get_taxi_postEDA_data_schema
+from src.validation.schema_postEDA import get_taxi_postEDA_data_schema
 import click
 
 # Enable VegaFusion for Altair

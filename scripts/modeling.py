@@ -15,10 +15,16 @@ from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 def main(x_train_path, y_train_path, x_test_path, y_test_path, charts_dir='charts'):
     # Fits a simple linear regression model onto the training data
     
-    X_train = pd.read_csv(x_train_path)['trip_distance'].values.reshape(-1,1)
-    y_train = pd.read_csv(y_train_path)['fare_amount'].values
-    X_test = pd.read_csv(x_test_path)['trip_distance'].values.reshape(-1,1)
-    y_test = pd.read_csv(y_test_path)['fare_amount'].values
+    os.makedirs(charts_dir, exist_ok=True)
+    
+    try:
+        X_train = pd.read_csv(x_train_path)['trip_distance'].values.reshape(-1,1)
+        y_train = pd.read_csv(y_train_path)['fare_amount'].values
+        X_test = pd.read_csv(x_test_path)['trip_distance'].values.reshape(-1,1)
+        y_test = pd.read_csv(y_test_path)['fare_amount'].values
+    except FileNotFoundError as e:
+        click.echo(f"Error: {e}", err=True)
+        raise SystemExit(1)
     
     np.random.seed(552)
 
