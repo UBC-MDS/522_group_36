@@ -3,7 +3,7 @@
 
 ## About
 
-This project predicts NYC yellow taxi fare prices based on trip distance. Analyzing 30,000 NYC yellow taxi trips in January 2024, we used a simple linear regression model where trip distance predicts fare price. The resulting model predicts that each additional mile travelled is associated with a $3.62 increase in the fare price. The model performed decently well - the R^2 value was 0.848. This means that 84.8% of the variance in the fare prices was explained by trip distance. This model could be useful for NYC taxi customers who know how long their taxi trip is going to be - they can use our model to predict their taxi fare price.
+This project predicts NYC yellow taxi fare prices based on trip distance. Analyzing 30,000 NYC yellow taxi trips in January 2024, we used a simple linear regression model where trip distance predicts fare price. The resulting model predicts that each additional mile travelled is associated with a $3.62 increase in the fare price. The model performed decently well - the $R^2$ value was 0.848. This means that 84.8% of the variance in the fare prices was explained by trip distance. This model could be useful for NYC taxi customers who know how long their taxi trip is going to be - they can use our model to predict their taxi fare price.
 
 ## Report
 
@@ -18,8 +18,9 @@ The final report can be found [here](https://UBC-MDS.github.io/DSCI_522_Group36_
 ### Running the Analysis
 
 1. **Clone the repository and navigate to the root of this project**:
-    ```bash
+    ```
     git clone https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor.git
+    
     cd DSCI_522_Group36_taxi_fare_predictor
     ```
     
@@ -42,38 +43,41 @@ The final report can be found [here](https://UBC-MDS.github.io/DSCI_522_Group36_
    In the terminal, look for a URL that starts with 
     `http://127.0.0.1:8888/lab?token=` 
 
+4. **Prepare the data**
+
+   To run this analysis pipeline, open a terminal and run the following commands:
+   
+   ```
+   python -m scripts.download_data
+   ```
     
-4. **Run data validation**
-    
+5. **Run data validation**
+
     ```
     python -m scripts.run_validation
     ```
+    
     This script will check if the data is valid and print out the result. If the data is valid, it will print out "Data validation passed successfully". If the data is invalid, it will log the error messages in logs and remove those rows. The validated data will be saved in data/processed. In this testing, we only removed 2000 rows after validation which are data that is outside of the NYC taxi data [documentation](https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf) range.
 
-5. **Run the analysis**
-
-    To run the analysis, open a terminal and run the following commands:
+6. **Run the eda analysis**
+   
     ```
-    python -m scripts.download_data 
-
     python -m scripts.run_eda run-all data/processed/yellow_tripdata_2024-01_validated.csv \
     --charts_dir charts
     ```
 
-6. **Run the model**
-
-   To run the model, run the following commands in the terminal:
+7. **Run the model**
 
    ```
-   python scripts/modeling.py --x-train-path data/processed/X_train.csv --y-train-path data/processed/y_train.csv --x-test-path data/processed/X_test.csv --y-test-path data/processed/y_test.csv
+   python -m scripts.modeling --x-train-path data/processed/X_train.csv --y-train-path data/processed/y_train.csv --x-test-path data/processed/X_test.csv --y-test-path data/processed/y_test.csv
    ```
 
-7. **Render Quarto**
+8. **Render Quarto**
 
    To render the Quarto document to HTML and PDF:
 
    ```
-   quarto render report/yellow-taxi-analysis.qmd --to html
+   quarto render report/yellow_taxi_analysis.qmd --to html
    quarto render report/yellow_taxi_analysis.qmd --to pdf
    ``` 
 
