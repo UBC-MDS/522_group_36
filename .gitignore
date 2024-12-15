@@ -13,3 +13,6 @@ logs/
 .quarto/
 .jupyter/
 .bash_history
+report/_site/
+report/docs/
+.docs/

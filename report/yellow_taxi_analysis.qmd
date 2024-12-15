@@ -6,6 +6,7 @@ format:
     toc: true
     toc-location: left
     number-sections: true
+    embed-resources: true
 editor: source
 bibliography: references.bib
 execute:
@@ -40,7 +41,7 @@ The analysis will be conducted using the Python programming language [@Python], 
 ### EDA
 Lets do some data validation by checking the target variable fare_amount's distribution:
 
-![Fare Amount Density Chart](../charts/Fare_Amount_Density_Chart.svg){#fig-density}
+![Fare Amount Density Chart](../charts/Fare_Amount_Density_Chart.png){#fig-density}
 
 Based on @fig-density, we see that most values of the fare amount make sense - they are mostly under $50, with a cluster of fare amounts at around 65 USD, likely a longer trip from the airport. However, we see fare amounts that are lower that 0 which are not explained by the documentation, that "The time-and-distance fare calculated by the meter." They might be simply refunded trips, but since we cannot confirm, we will choose to drop rows where the fare amount is negative.
 
@@ -73,7 +74,7 @@ Based on the summary statistics in @tbl-summary, for the fare amount, the mean f
 
 Next, we'll create a correlation plot of all of the columns against one another, to check out the strength and direction of associations between columns.
 
-![Correlation Plot](../charts/Correlation_Plot_Train_Spearman.svg){#fig-correlation}
+![Correlation Plot](../charts/Correlation_Plot_Train_Spearman.png){#fig-correlation}
 
 Based on @fig-correlation, we see that "trip_distance" and "fare_amount" have a fairly high positive correlation, which may indicate that they are fairly positively associated with each other. We decide now to use "trip_distance" to try and predict "fare_amount". Since there are no null values in "trip_distance", no null values need to be dropped for "trip_distance".
 
@@ -121,11 +122,11 @@ metrics_df = pd.DataFrame({
 Markdown(metrics_df.to_markdown(index = False))
 ```
 
-![Predicted vs Actual Taxi Fare Amounts With Error Line](../charts/Pred_Vs_Actual.svg){#fig-error}
+![Predicted vs Actual Taxi Fare Amounts With Error Line](../charts/Pred_Vs_Actual.png){#fig-error}
 
 Lastly in @fig-predictions, here is the regression line for the predictions.
 
-![Regression of Trip Distance vs Fare Amount for NYC Yellow Taxis in January 2024](../charts/Final_Linear_Regression.svg){#fig-predictions}
+![Regression of Trip Distance vs Fare Amount for NYC Yellow Taxis in January 2024](../charts/Final_Linear_Regression.png){#fig-predictions}
 
 ### Results
 The objective of the analysis was to predict the fare amount using a linear regression model. The regression plot, generated from the model, demonstrates a positive linear relationship between trip distance and fare amount for NYC Yellow Taxis in January 2024. This confirms that as the trip distance increases, the fare amount also increases, as expected.

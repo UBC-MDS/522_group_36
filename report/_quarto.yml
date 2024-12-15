@@ -1,14 +1,7 @@
 project:
-  type: website  
-  output-dir: ../docs  
+  type: website
 
-format:
-  html:
-    toc: true              
-    toc-location: left     
-    number-sections: true   
-
-bibliography: references.bib  
-
-execute:
-  echo: false            
+publish:
+  gh-pages:
+    branch: gh-pages
+    directory: docs
