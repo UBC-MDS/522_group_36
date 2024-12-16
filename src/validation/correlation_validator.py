@@ -2,12 +2,6 @@ import logging
 import pandas as pd
 from deepchecks.tabular import Dataset
 from deepchecks.tabular.checks import FeatureLabelCorrelation, FeatureFeatureCorrelation
-logging.basicConfig(
-        filename="logs/correlation_errors.log",
-        filemode="a",
-        format="%(asctime)s - %(levelname)s - %(message)s",
-        level=logging.INFO,
-    )
 
 class CorrelationValidator:
     def __init__(self, target: str, feature_threshold: float = 0.9, feature_feature_threshold: float = 0.8,

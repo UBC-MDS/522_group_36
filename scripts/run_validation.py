@@ -3,7 +3,7 @@
 import sys
 import os
 import yaml
-import click
+import logging
 from src.validation.validate import DataValidator
 
 def load_config(config_path: str) -> dict:
@@ -21,12 +21,28 @@ def load_config(config_path: str) -> dict:
         print(f"Error loading config file: {e}")
         sys.exit(1)
 
-@click.command()
 def main():
     # Add the project root to sys.path
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     if project_root not in sys.path:
         sys.path.insert(0, project_root)
+
+    # Create logs directory if it doesn't exist
+    logs_dir = os.path.join(project_root, "logs")
+    os.makedirs(logs_dir, exist_ok=True)
+    
+    # Create .gitkeep file in logs directory
+    gitkeep_path = os.path.join(logs_dir, ".gitkeep")
+    if not os.path.exists(gitkeep_path):
+        with open(gitkeep_path, 'w') as f:
+            pass  # Create empty file
+
+    # Configure logging
+    logging.basicConfig(
+        filename=os.path.join(logs_dir, "correlation_errors.log"),
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
 
     # Load configuration
     config_path = os.path.join(project_root, "config", "validation_config.yaml")
