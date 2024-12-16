@@ -2,7 +2,7 @@ services:
   taxi_fare_predictor:
     build: .
     platform: linux/amd64
-    image: lixuanlin/taxi-fare-predictor:latest
+    image: lixuanlin/taxi-fare-predictor:95968c8
     #image: local-taxi-predictor
     ports:
       - "8888:8888"
