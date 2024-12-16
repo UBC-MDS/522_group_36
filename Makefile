@@ -72,6 +72,15 @@ charts/Regression_Performance_Metrics.png \
 charts/Pred_Vs_Actual.png \
 charts/Final_Linear_Regression.png
 	quarto render report/yellow_taxi_analysis.qmd --to html
+
+report/yellow_taxi_analysis.pdf : report/yellow_taxi_analysis.qmd \
+charts/Fare_Amount_Density_Chart.png \
+charts/Missing_Values_Heatmap_Train.png \
+charts/Correlation_Plot_Train_Spearman.png \
+charts/Regression_Formula_Text.png \
+charts/Regression_Performance_Metrics.png \
+charts/Pred_Vs_Actual.png \
+charts/Final_Linear_Regression.png
 	quarto render report/yellow_taxi_analysis.qmd --to pdf
 
 # example usage:
