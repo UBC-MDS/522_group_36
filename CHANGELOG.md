@@ -97,17 +97,16 @@ The changes to this project will be documented in this file.
 - Added a detailed discussion on the assumptions of linear regression in the limination and next step
   - Pull Requests:
   - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/74
-  - This change incorporates feedback from Adrian Leung to discuss the assumptions of linear regression and the potential consequences of violating these assumptions, making the motivation for the next steps more convincing.
+  - This change incorporates feedback from Adrian Leung (Comment 3) to discuss the assumptions of linear regression and the potential consequences of violating these assumptions, making the motivation for the next steps more convincing.https://github.com/UBC-MDS/data-analysis-review-2024/issues/16#issuecomment-2537876330
 
 - Referenced figures explicitly in the results section
   - Pull Requests:
   - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/74
-  - This change addresses feedback from Julian Daduica, where figures are now referenced by their exact numbers in the results section, ensuring clarity in the report.
-
+  - This change addresses feedback from Julian Daduica (Comment 1), where figures are now referenced by their exact numbers in the results section, ensuring clarity in the report.https://github.com/UBC-MDS/data-analysis-review-2024/issues/16#issuecomment-2537876330
 - Removed unnecessary weblinks from the dataset section
   - Pull Requests:
   - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/74
-  - This update fixes the issue mentioned by Julian Daduica regarding redundant weblinks in the dataset section. The unnecessary weblinks in brackets were deleted, and the hyperlink remains in the reference section.
+  - This update fixes the issue mentioned by Julian Daduica (Comment 3) regarding redundant weblinks in the dataset section. The unnecessary weblinks in brackets were deleted, and the hyperlink remains in the reference section.https://github.com/UBC-MDS/data-analysis-review-2024/issues/16#issuecomment-2537876330
 
 ## [2.0.0] - 2024-12-08
 
