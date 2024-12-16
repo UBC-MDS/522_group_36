@@ -23,6 +23,8 @@ The changes to this project will be documented in this file.
 - Added a Makefile script to run the analysis pipeline
   - Pull Requests:
   - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/58
+
+
     
 ### Changed
 
@@ -91,6 +93,21 @@ The changes to this project will be documented in this file.
     - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/49
     - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/71
   - This change was a fix to the issues mentioned in Milestone 1 feedback that "Having too many files in the project root makes the project organization less understandable." and Adrian's comment's on the peer review issue that "The organization of the folders is a bit messy and hard to navigate.". (Comment 1) https://github.com/UBC-MDS/data-analysis-review-2024/issues/16#issuecomment-2537876330
+
+- Added a detailed discussion on the assumptions of linear regression in the limination and next step
+  - Pull Requests:
+  - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/74
+  - This change incorporates feedback from Adrian Leung to discuss the assumptions of linear regression and the potential consequences of violating these assumptions, making the motivation for the next steps more convincing.
+
+- Referenced figures explicitly in the results section
+  - Pull Requests:
+  - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/74
+  - This change addresses feedback from Julian Daduica, where figures are now referenced by their exact numbers in the results section, ensuring clarity in the report.
+
+- Removed unnecessary weblinks from the dataset section
+  - Pull Requests:
+  - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/74
+  - This update fixes the issue mentioned by Julian Daduica regarding redundant weblinks in the dataset section. The unnecessary weblinks in brackets were deleted, and the hyperlink remains in the reference section.
 
 ## [2.0.0] - 2024-12-08
 
