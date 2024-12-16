@@ -43,3 +43,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Update docker-compose.yml with new image tag
+        if: success()
+        run: |
