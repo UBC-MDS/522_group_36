@@ -16,6 +16,9 @@ The changes to this project will be documented in this file.
     - <https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/69> 
   - This change was required by milestone 4.
 
+- Added a Make to the Docker environment.
+  - Pull Requests:
+   - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/73
 ### Changed
 
 - Exported the scripts to run the analysis into functions.
@@ -24,11 +27,20 @@ The changes to this project will be documented in this file.
     - <https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/41> 
     - <https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/27>
   - This change was required by milestone 4.
+- READEME.md reproducibility sequence
+  - Added Makefile support
+  - Badges for correctly built images
+  - Pull request:
+    - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/77
 
 - Moved around files in the repository to make it more organized.
   - Pull request:
     - <https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/49>
   - This change was a fix to the issues mentioned in Milestone 1 feedback that "Having too many files in the project root makes the project organization less understandable."
+
+- Fixed bugs `run_validation.py` where it's unable to run due to missing folder structures. 
+  - Pull requests:
+    - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/72
 
 ### Fixed
 
@@ -59,6 +71,12 @@ The changes to this project will be documented in this file.
   - Fixed references:
     - https://ubc-mds.github.io/DSCI_522_Group36_taxi_fare_predictor/yellow_taxi_analysis.html#references 
   - This change fixes the issues mentioned in Milestone 1 feedback about 2 references looking like they are combined into 1 big reference.
+
+- Fixed GitHub Pages not showing correct images. 
+  - Addressed to Adrian's comment's on the same peer review issue. (Comment 2) https://github.com/UBC-MDS/data-analysis-review-2024/issues/16#issuecomment-2537876330
+  - Pull request:
+    - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/66/files
+
 
 ## [2.0.0] - 2024-12-08
 
