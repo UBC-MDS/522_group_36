@@ -38,7 +38,7 @@ The changes to this project will be documented in this file.
     - <https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/49>
   - This change was a fix to the issues mentioned in Milestone 1 feedback that "Having too many files in the project root makes the project organization less understandable."
 
-- Fixed bugs `run_validation.py` where it's unable to run due to missing folder structures. 
+- Fixed bugs `run_validation.py` where it's unable to run due to missing folder structures. Removed unnecessary click commands. 
   - Pull requests:
     - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/72
 
