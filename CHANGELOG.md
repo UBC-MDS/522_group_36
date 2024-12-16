@@ -18,7 +18,12 @@ The changes to this project will be documented in this file.
 
 - Added a Make to the Docker environment.
   - Pull Requests:
-   - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/73
+  - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/73
+ 
+- Added a Makefile script to run the analysis pipeline
+  - Pull Requests:
+  - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/58
+    
 ### Changed
 
 - Exported the scripts to run the analysis into functions.
@@ -27,16 +32,14 @@ The changes to this project will be documented in this file.
     - <https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/41> 
     - <https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/27>
   - This change was required by milestone 4.
+
 - READEME.md reproducibility sequence
   - Added Makefile support
   - Badges for correctly built images
+  - Corrected instructions sequence and command line consistency
   - Pull request:
     - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/77
-
-- Moved around files in the repository to make it more organized.
-  - Pull request:
-    - <https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/49>
-  - This change was a fix to the issues mentioned in Milestone 1 feedback that "Having too many files in the project root makes the project organization less understandable."
+    - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/71
 
 - Fixed bugs `run_validation.py` where it's unable to run due to missing folder structures. Removed unnecessary click commands. 
   - Pull requests:
@@ -77,6 +80,17 @@ The changes to this project will be documented in this file.
   - Pull request:
     - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/66/files
 
+- Fixed to pin Dockerfile base image version (tag) and add a step to the docker-publish.yml workflow so that it automatically updates the docker-compose.yml file with the tag of the new image that is built and published
+  - This change fixes the issues mentioned in Milestone 2 feedback about Dockerfile base image version (tag) was not pinned
+  - Fixed Docker files:
+    - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/blob/main/docker-compose.yml
+    - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/blob/main/.github/workflows/docker-publish.yml
+   
+- Moved around files in the repository to make it more organized.
+  - Pull request:
+    - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/49
+    - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/71
+  - This change was a fix to the issues mentioned in Milestone 1 feedback that "Having too many files in the project root makes the project organization less understandable." and Adrian's comment's on the peer review issue that "The organization of the folders is a bit messy and hard to navigate.". (Comment 1) https://github.com/UBC-MDS/data-analysis-review-2024/issues/16#issuecomment-2537876330
 
 ## [2.0.0] - 2024-12-08
 
