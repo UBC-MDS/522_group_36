@@ -45,6 +45,21 @@ The changes to this project will be documented in this file.
     - <https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/77>
   - This change was a fix to the issues mentioned in Milestone 1 feedback about the missing summary, dependencies, and straightforward instructions on how to run the analysis.
 
+- Fixed environment.yml file to include the versions of the packages used, as well as using = for reproducibility.
+  - environment.yml file:
+    - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/blame/main/environment.yml
+  - This change fixes the issues mentioned in Milestone 1 feedback about versions that are missing from environment files, as well as using >= instead of = in the file.
+
+- Fixed the tables in tables to not be raw code results, and added table labeling.
+  - Fixed tables:
+    - https://ubc-mds.github.io/DSCI_522_Group36_taxi_fare_predictor/yellow_taxi_analysis.html
+  - This changes fixes the issues mentioned in Milestone 1 feedback about the tables being raw code results and not having table labeling.
+
+- Fix the references so that 2 references don't look like they're combined into 1 reference
+  - Fixed references:
+    - https://ubc-mds.github.io/DSCI_522_Group36_taxi_fare_predictor/yellow_taxi_analysis.html#references 
+  - This change fixes the issues mentioned in Milestone 1 feedback about 2 references looking like they are combined into 1 big reference.
+
 ## [2.0.0] - 2024-12-08
 
 ### Added
