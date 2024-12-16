@@ -13,13 +13,17 @@ RUN conda init bash && \
 USER root
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends lmodern librsvg2-bin && \
+    apt-get install -y --no-install-recommends \
+    lmodern \
+    librsvg2-bin \
+    make && \ 
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     mkdir -p /home/jovyan/.cache/conda && \
     chown -R $NB_UID:$NB_GID /home/jovyan/.cache && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
+
 
 RUN pip install \
 pandera==0.21.0 \
