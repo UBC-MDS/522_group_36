@@ -1,5 +1,11 @@
 # NYC Yellow Taxi Fare Predictor 🚕
 
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/docker-publish.yml)
+[![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC_BY--NC--ND_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
+
 
 ## About
 
@@ -11,7 +17,7 @@ The final report can be found [here](https://UBC-MDS.github.io/DSCI_522_Group36_
 
 ## Usage
 
-## Option 1: Using Docker
+## Option 1: Using Docker With Manual Build
 
 ### Setup
 
@@ -87,17 +93,25 @@ To shut down the container and clean up the resources, type `Cntrl` + `C` in the
 terminal where you launched the container, and then type `docker compose rm`
 
 
-## Option 2: Without using Docker
+## Option 2: Docker Build With Make
 
-1. To replicate the analysis, clone this GitHub repository, install the
-dependencies listed below, and run the following command at the command line/terminal 
+1. To replicate the analysis, clone this GitHub repository, then run the following command at the command line/terminal 
 from the root directory of this project:
+
+    ```
+    docker compose up 
+    ```
+
+In the terminal, look for a URL that starts with 
+    `http://127.0.0.1:8888/lab?token=`
+
+2. After Docker builds and launches the container with Jupyter Lab. Run this command in the Jupyter Terminal. 
 
     ```
     make all
     ```
 
-2. To reset the repo to a clean state, with no intermediate or results
+3. To reset the repo to a clean state, with no intermediate or results
 files, run the following command at the command line/terminal from the
 root directory of this project:
 
