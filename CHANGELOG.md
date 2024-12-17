@@ -108,6 +108,11 @@ The changes to this project will be documented in this file.
   - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/74
   - This update fixes the issue mentioned by Julian Daduica (Comment 3) regarding redundant weblinks in the dataset section. The unnecessary weblinks in brackets were deleted, and the hyperlink remains in the reference section.https://github.com/UBC-MDS/data-analysis-review-2024/issues/16#issuecomment-2537876330
 
+- Added better docstrings to modeling.py that explain the function better
+  - Pull Request:
+    - https://github.com/UBC-MDS/DSCI_522_Group36_taxi_fare_predictor/pull/85
+  - This fixes the issue mentioned by Julian Daduica (Comment 2) regarding the lack of detailed docstrings in the modeling.py file. https://github.com/UBC-MDS/data-analysis-review-2024/issues/16#issuecomment-2530174958 
+
 ## [2.0.0] - 2024-12-08
 
 ### Added
