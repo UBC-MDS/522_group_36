@@ -13,8 +13,16 @@ from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 @click.option('--y-test-path', type=str, help="Path to y testing data")
 @click.option('--charts-dir', type=str, default="charts", help="Directory to save charts")
 def main(x_train_path, y_train_path, x_test_path, y_test_path, charts_dir='charts'):
-    # Fits a simple linear regression model onto the training data
+    """
+    Fits a simple linear regression model onto the training data and evaluates it on the test data.
     
+    Args:
+        x_train_path (str): Path to the X training data CSV file.
+        y_train_path (str): Path to the y training data CSV file.
+        x_test_path (str): Path to the X testing data CSV file.
+        y_test_path (str): Path to the y testing data CSV file.
+        charts_dir (str): Directory to save the generated charts. Defaults to 'charts'.
+    """
     os.makedirs(charts_dir, exist_ok=True)
     
     try:
