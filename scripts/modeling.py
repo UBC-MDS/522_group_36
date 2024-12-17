@@ -16,6 +16,13 @@ def main(x_train_path, y_train_path, x_test_path, y_test_path, charts_dir='chart
     """
     Fits a simple linear regression model onto the training data and evaluates it on the test data.
     
+    This function does the following steps:
+    1. Loads the training and testing data from the CSV files.
+    2. Fits a linear regression model using the training data.
+    3. Makes predictions on the test data.
+    4. Calculates and prints regression metrics (RMSE, R², MAE).
+    5. Generates and saves charts to visualize the regression results and performance metrics.
+    
     Args:
         x_train_path (str): Path to the X training data CSV file.
         y_train_path (str): Path to the y training data CSV file.
